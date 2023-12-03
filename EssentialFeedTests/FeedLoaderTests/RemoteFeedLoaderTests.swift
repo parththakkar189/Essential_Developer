@@ -8,13 +8,14 @@
 import XCTest
 class RemoteFeedLoader {
     let client: HTTPClient
-    
-    init(client: HTTPClient) {
+    let url: URL
+    init(url: URL = URL(string: "https://a-url.com")!, client: HTTPClient) {
+        self.url = url
         self.client = client
     }
     
     func load() {
-        client.get(from: URL(string: "https://a-url.com")!)
+        client.get(from: url)
     }
 }
 protocol HTTPClient {
@@ -39,11 +40,12 @@ final class RemoteFeedLoaderTests: XCTestCase {
     }
     
     func test_loadRequestDataFromURL() {
+        let url =  URL(string: "https://a-givenURL.com")!
         let client = HTTPClientSpy()
-        let sut = RemoteFeedLoader(client: client)
+        let sut = RemoteFeedLoader(url: url, client: client)
         
         sut.load()
         
-        XCTAssertNotNil(client.requestedURL)
+        XCTAssertEqual(client.requestedURL, url)
     }
 }
