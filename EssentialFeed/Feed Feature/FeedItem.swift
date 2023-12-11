@@ -15,7 +15,7 @@ public struct FeedItem: Equatable {
     public let location: String?
     public let imageURL: URL
     
-    public init(id: UUID, description: String?, location: String?, imageURL: URL) {
+    public init(id: UUID, description: String?, location: String? = nil , imageURL: URL) {
         self.id = id
         self.description = description
         self.location = location
@@ -30,4 +30,17 @@ extension FeedItem: Decodable {
         case location
         case imageURL = "image"
     }
+    
+    public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id.uuidString, forKey: .id)
+            try container.encode(description, forKey: .description)
+            
+            // Check if locaiton is nil before encoding
+            if let location = location {
+                try container.encode(location, forKey: .location)
+            }
+
+            try container.encode(imageURL.absoluteString, forKey: .imageURL)
+        }
 }

@@ -47,7 +47,8 @@ final class RemoteFeedLoaderTests: XCTestCase {
         
         smaples.enumerated().forEach { index,code in
             expect(sut, toCompleteWithResult: .failure(.invalidData)) {
-                client.complete(withStatusCode: code, at: index)
+                let json = makeItemsJSON([])
+                client.complete(withStatusCode: code, data: json, at: index)
             }
         }
     }
@@ -73,9 +74,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
     func test_load_deliverItemsOn200HTTPResponseWithJSONItems() {
         let (sut, client) = makeSUT()
         let item1 = makeItem(id: UUID(),
-                             description: nil,
-                             location: nil,
-                             imageURL: URL(string: "http://a-url.com")!)
+                            imageURL: URL(string: "http://a-url.com")!)
         
         let item2 = makeItem(id: UUID(),
                              description: "a description",
@@ -83,16 +82,17 @@ final class RemoteFeedLoaderTests: XCTestCase {
                              imageURL: URL(string: "http://another-url.com")!)
         
         let items = [item1.model, item2.model]
+        
         expect(sut,
                toCompleteWithResult: .success(items)) {
-            let json = try! JSONSerialization.data(withJSONObject: makeItemsJSON([item1.json, item2.json]))
+            let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         }
     }
     
     //MARK: Helpers
     
-    private func makeItem(id: UUID, description: String? = nil, location: String?, imageURL: URL) -> (model: FeedItem, json: [String: Any]) {
+    private func makeItem(id: UUID, description: String? = nil, location: String? = nil, imageURL: URL) -> (model: FeedItem, json: [String: Any]) {
         let item = FeedItem(id: id, description: description, location: location, imageURL: imageURL)
         let json = [ "id": id.uuidString,
                      "description": description,
@@ -100,7 +100,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
                      "image": imageURL.absoluteString
         ].reduce(into: [String: Any]()) { (acc, e) in
             if let value = e.value { acc[e.key] = value }
-            
+            else { acc[e.key] = nil }
         }
         return (item, json)
     }
@@ -142,7 +142,7 @@ final class RemoteFeedLoaderTests: XCTestCase {
             messages[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
             let response = HTTPURLResponse(
                 url: requestedURLs[index],
                 statusCode: code,
