@@ -31,6 +31,10 @@ extension FeedItem: Decodable {
         case imageURL = "image"
     }
     
+    var item: FeedItem {
+        return FeedItem(id: id, description: description, location: location, imageURL: imageURL)
+    }
+    
     public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(id.uuidString, forKey: .id)
