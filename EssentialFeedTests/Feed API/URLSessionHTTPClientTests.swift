@@ -14,13 +14,13 @@ class URLSessionHTTPClient {
     }
     
     func get(from url: URL) {
-        session.dataTask(with: url) { _, _, _ in }
+        session.dataTask(with: url) { _, _, _ in }.resume()
     }
 }
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    func test() {
+    func test_getFromURL_createsDataTaskWithURL() {
         let url = URL(string: "http://any-url.com")!
         let session = URLSessionSpy()
         let sut = URLSessionHTTPClient(session: session)
@@ -28,11 +28,27 @@ class URLSessionHTTPClientTests: XCTestCase {
         XCTAssertEqual(session.receivedURLs, [url])
     }
     
+    func test_getFromURL_resumesDataTaskWithURL() {
+        let url = URL(string: "http://any-url.com")!
+        let session = URLSessionSpy()
+        let task = URLSessionDataTaskSpy()
+        session.stub(url: url, task: task)
+        let sut = URLSessionHTTPClient(session: session)
+        sut.get(from: url)
+        XCTAssertEqual(task.resumeCallCount, 1)
+    }
     
     // MARK:- Helpers
     private class URLSessionSpy: URLSession, @unchecked Sendable {
         var receivedURLs = [URL]()
         private let queue = DispatchQueue(label: "URLSessionSpy.queue")
+        private var stubs = [URL: URLSessionDataTask]()
+        
+        func stub(url: URL, task: URLSessionDataTask) {
+            stubs[url] = task
+        }
+        
+        
         
         override func dataTask(
             with url: URL,
@@ -41,7 +57,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             queue.sync {
                 receivedURLs.append(url)
             }
-            return FakeURLSessionDataTask()
+            return stubs[url] ?? FakeURLSessionDataTask()
         }
         
         func getReceivedURLs() -> [URL] {
@@ -51,6 +67,16 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
     }
     
-    private class FakeURLSessionDataTask: URLSessionDataTask, @unchecked Sendable { }
+    private class FakeURLSessionDataTask: URLSessionDataTask, @unchecked Sendable {
+        override func resume() {}
+        
+    }
+    private class URLSessionDataTaskSpy: URLSessionDataTask, @unchecked Sendable {
+        var resumeCallCount = 0
+        
+        override func resume() {
+            resumeCallCount += 1
+        }
+    }
 }
 
