@@ -26,12 +26,12 @@ class URLSessionHTTPClient {
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    override setUp() {
+    override func setUp() {
         super.setUp()
         URLProtocolStub.startInterceptingRequest()
     }
 
-    override tearDown() {
+    override func tearDown() {
         URLProtocolStub.stopInterceptingRequest()
         super.tearDown()
     }
@@ -72,7 +72,11 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     // MARK:- Helpers
     
-    private func makeSUT() -> URLSessionHTTPClient {
+    private func makeSUT(file: StaticString = #filePath,
+                         line: UInt = #line
+    ) -> URLSessionHTTPClient {
+        let sut = URLSessionHTTPClient()
+        trackForMemoryLeaks(sut, file: file, line: line)
         return URLSessionHTTPClient()
     }
     
