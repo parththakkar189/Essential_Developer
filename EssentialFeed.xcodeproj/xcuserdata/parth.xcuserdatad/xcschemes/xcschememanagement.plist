@@ -15,6 +15,7 @@
 			<integer>0</integer>
 		</dict>
 		<key>EssentialFeedEndToEndTests.xcscheme_^#shared#^_</key>
+		<key>EssentialFeedTests.xcscheme_^#shared#^_</key>n
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
