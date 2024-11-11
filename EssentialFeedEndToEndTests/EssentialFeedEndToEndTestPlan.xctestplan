@@ -14,6 +14,17 @@
   "testTargets" : [
     {
       "parallelizable" : true,
+      "skippedTests" : [
+        "RemoteFeedLoaderTests\/test_init()",
+        "RemoteFeedLoaderTests\/test_loadRequestsDataFromURL()",
+        "RemoteFeedLoaderTests\/test_loadTwice_requestsDataFromURLTwice()",
+        "RemoteFeedLoaderTests\/test_load_deliverItemsOn200HTTPResponseWithJSONItems()",
+        "RemoteFeedLoaderTests\/test_load_deliversErrorOn200HTTPResponsWithInvalidJSON()",
+        "RemoteFeedLoaderTests\/test_load_deliversErrorOnClientError()",
+        "RemoteFeedLoaderTests\/test_load_deliversErrorOnNon200HTTPResponse()",
+        "RemoteFeedLoaderTests\/test_load_deliversNoItemsOn200HTTPResponseWithEmptyJSONList()",
+        "RemoteFeedLoaderTests\/test_load_doesNotDeliverResultAfterSUIInstanceHasBeenDeallocated()"
+      ],
       "target" : {
         "containerPath" : "container:EssentialFeed.xcodeproj",
         "identifier" : "B27653A62CE2761E002EE55D",
