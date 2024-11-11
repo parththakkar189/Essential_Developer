@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "40CC67BB-1399-48DD-8BDA-8567B717B252",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:EssentialFeed.xcodeproj",
+        "identifier" : "B27653A62CE2761E002EE55D",
+        "name" : "EssentialFeedEndToEndTests"
+      }
+    }
+  ],
+  "version" : 1
+}

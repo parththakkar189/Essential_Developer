@@ -32,6 +32,8 @@
 		B276539C2CE2572D002EE55D /* EssentialFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B276539A2CE2572D002EE55D /* EssentialFeedTests.swift */; };
 		B27653AB2CE2761E002EE55D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
 		B27653B32CE27625002EE55D /* EssentialFeedEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27653B12CE27625002EE55D /* EssentialFeedEndToEndTests.swift */; };
+		B27653B42CE27E0D002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27653882CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift */; };
+		B27653B72CE27F2C002EE55D /* EssentialFeedEndToEndTestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B27653B62CE27F2C002EE55D /* EssentialFeedEndToEndTestPlan.xctestplan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,7 @@
 		B276539A2CE2572D002EE55D /* EssentialFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedTests.swift; sourceTree = "<group>"; };
 		B27653A72CE2761E002EE55D /* EssentialFeedEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B27653B12CE27625002EE55D /* EssentialFeedEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedEndToEndTests.swift; sourceTree = "<group>"; };
+		B27653B62CE27F2C002EE55D /* EssentialFeedEndToEndTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = EssentialFeedEndToEndTestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				B27653B12CE27625002EE55D /* EssentialFeedEndToEndTests.swift */,
+				B27653B62CE27F2C002EE55D /* EssentialFeedEndToEndTestPlan.xctestplan */,
 			);
 			path = EssentialFeedEndToEndTests;
 			sourceTree = "<group>";
@@ -319,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27653B72CE27F2C002EE55D /* EssentialFeedEndToEndTestPlan.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B27653B32CE27625002EE55D /* EssentialFeedEndToEndTests.swift in Sources */,
+				B27653B42CE27E0D002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
