@@ -230,7 +230,6 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         override class func canInit(with request: URLRequest) -> Bool {
-            requestObserver?(request)
             return true
         }
         
@@ -239,6 +238,10 @@ class URLSessionHTTPClientTests: XCTestCase {
         }
         
         override func startLoading() {
+            if let requestObersver = Self.requestObserver {
+                client?.urlProtocolDidFinishLoading(self)
+                return requestObersver(request)
+            }
             if let data = Self.stub?.data {
                 client?.urlProtocol(self, didLoad: data)
             }
