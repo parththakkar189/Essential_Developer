@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   workflow_dispatch:
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-test:
@@ -25,7 +26,13 @@ jobs:
       
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
-      
+
+    - name: List root directory contents
+      run: ls -al
+
+    - name: List EssentialFeed directory contents
+      run: ls -al EssentialFeed
+
     - name: Build and test
       run: |
         /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
