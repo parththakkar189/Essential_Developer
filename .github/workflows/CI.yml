@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build-and-test"
   build-and-test:
     # The type of runner that the job will run on
     runs-on: macos-latest
@@ -27,7 +26,7 @@ jobs:
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
       
-   - name: Build and test
+    - name: Build and test
       run: |
         /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
           -project EssentialFeed/EssentialFeed.xcodeproj \
