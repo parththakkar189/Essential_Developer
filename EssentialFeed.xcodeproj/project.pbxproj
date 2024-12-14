@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		080EDEFB21B6DA7E00813479 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
 		B20C6EAB2CE2A987003658EC /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
+		B264C9692D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */; };
+		B264C96A2D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */; };
 		B276537A2CE2562C002EE55D /* FeedItemMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27653752CE2562C002EE55D /* FeedItemMapper.swift */; };
 		B276537B2CE2562C002EE55D /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27653782CE2562C002EE55D /* URLSessionHTTPClient.swift */; };
 		B276537C2CE2562C002EE55D /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27653722CE2562C002EE55D /* FeedItem.swift */; };
@@ -61,6 +63,7 @@
 		080EDEF521B6DA7E00813479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		080EDEFA21B6DA7E00813479 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080EDF0121B6DA7E00813479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		B27653722CE2562C002EE55D /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 		B27653732CE2562C002EE55D /* FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoader.swift; sourceTree = "<group>"; };
 		B27653752CE2562C002EE55D /* FeedItemMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemMapper.swift; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		080EDEF321B6DA7E00813479 /* EssentialFeed */ = {
 			isa = PBXGroup;
 			children = (
+				B264C9672D0E1D3500273D55 /* Feed Cache */,
 				B27653742CE2562C002EE55D /* Feed Feature */,
 				B27653792CE2562C002EE55D /* FeedAPI */,
 				080EDEF521B6DA7E00813479 /* Info.plist */,
@@ -156,6 +160,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B264C9672D0E1D3500273D55 /* Feed Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */,
+			);
+			path = "Feed Cache";
 			sourceTree = "<group>";
 		};
 		B27653742CE2562C002EE55D /* Feed Feature */ = {
@@ -372,6 +384,7 @@
 				B27653952CE25688002EE55D /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
 				B27653962CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2DA17472D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
+				B264C9692D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */,
 				B27653812CE2562C002EE55D /* URLSessionHTTPClient.swift in Sources */,
 				B27653822CE2562C002EE55D /* FeedItem.swift in Sources */,
 				B27653832CE2562C002EE55D /* RemoteFeedLoader.swift in Sources */,
@@ -390,6 +403,7 @@
 				B27653902CE25688002EE55D /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
 				B27653912CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
+				B264C96A2D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */,
 				B276537B2CE2562C002EE55D /* URLSessionHTTPClient.swift in Sources */,
 				B276537C2CE2562C002EE55D /* FeedItem.swift in Sources */,
 				B276537D2CE2562C002EE55D /* RemoteFeedLoader.swift in Sources */,
