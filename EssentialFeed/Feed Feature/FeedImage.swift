@@ -7,30 +7,30 @@
 
 import Foundation
 
-public struct FeedItem: Equatable {
+public struct FeedImage: Equatable {
     public let id: UUID
     public let description: String?
     public let location: String?
-    public let imageURL: URL
+    public let url: URL
     
-    public init(id: UUID, description: String?, location: String? = nil , imageURL: URL) {
+    public init(id: UUID, description: String?, location: String? = nil , url: URL) {
         self.id = id
         self.description = description
         self.location = location
-        self.imageURL = imageURL
+        self.url = url
     }
 }
 
-extension FeedItem: Decodable {
+extension FeedImage: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id
         case description
         case location
-        case imageURL = "image"
+        case url = "image"
     }
     
-    var item: FeedItem {
-        return FeedItem(id: id, description: description, location: location, imageURL: imageURL)
+    var item: FeedImage {
+        return FeedImage(id: id, description: description, location: location, url: url)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -43,6 +43,6 @@ extension FeedItem: Decodable {
                 try container.encode(location, forKey: .location)
             }
 
-            try container.encode(imageURL.absoluteString, forKey: .imageURL)
+        try container.encode(url.absoluteString, forKey: .url)
         }
 }
