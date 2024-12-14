@@ -6,12 +6,7 @@
 //
 
 import Foundation
-struct Root: Decodable {
-    let items: [FeedItem]
-    var feed: [FeedItem] {
-        return items.compactMap { $0.item }
-    }
-}
+
 public struct FeedItem: Equatable {
     public let id: UUID
     public let description: String?
