@@ -11,6 +11,8 @@
 		B20C6EAB2CE2A987003658EC /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 080EDEF121B6DA7E00813479 /* EssentialFeed.framework */; };
 		B25C4A802D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C4A7F2D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift */; };
 		B25C4A812D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C4A7F2D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift */; };
+		B25C4A842D3C5AAD00B54C04 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C4A832D3C5AAD00B54C04 /* FeedStoreSpy.swift */; };
+		B25C4A852D3C5AAD00B54C04 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25C4A832D3C5AAD00B54C04 /* FeedStoreSpy.swift */; };
 		B264C9692D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */; };
 		B264C96A2D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */; };
 		B264C96C2D0E1E1400273D55 /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B264C96B2D0E1E1400273D55 /* FeedStore.swift */; };
@@ -72,6 +74,7 @@
 		080EDEFA21B6DA7E00813479 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080EDF0121B6DA7E00813479 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B25C4A7F2D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromCacheUserCaseTests.swift; sourceTree = "<group>"; };
+		B25C4A832D3C5AAD00B54C04 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
 		B264C9682D0E1D4300273D55 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		B264C96B2D0E1E1400273D55 /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		B264C96E2D0E336700273D55 /* RemoteFeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedItem.swift; sourceTree = "<group>"; };
@@ -174,6 +177,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B25C4A862D3C5ABD00B54C04 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B25C4A832D3C5AAD00B54C04 /* FeedStoreSpy.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		B264C9672D0E1D3500273D55 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +245,7 @@
 		B2DA17442D062B04008FAB76 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
+				B25C4A862D3C5ABD00B54C04 /* Helpers */,
 				B2DA17452D062B26008FAB76 /* CacheFeedUseCaseTests.swift */,
 				B25C4A7F2D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift */,
 			);
@@ -403,6 +415,7 @@
 				B27653962CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2DA17472D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
 				B264C9692D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */,
+				B25C4A852D3C5AAD00B54C04 /* FeedStoreSpy.swift in Sources */,
 				B25C4A812D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift in Sources */,
 				B27653812CE2562C002EE55D /* URLSessionHTTPClient.swift in Sources */,
 				B27653822CE2562C002EE55D /* FeedImage.swift in Sources */,
@@ -426,6 +439,7 @@
 				B27653912CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
 				B264C96A2D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */,
+				B25C4A842D3C5AAD00B54C04 /* FeedStoreSpy.swift in Sources */,
 				B25C4A802D3C594400B54C04 /* LoadFeedFromCacheUserCaseTests.swift in Sources */,
 				B276537B2CE2562C002EE55D /* URLSessionHTTPClient.swift in Sources */,
 				B276537C2CE2562C002EE55D /* FeedImage.swift in Sources */,
