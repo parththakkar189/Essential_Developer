@@ -1,5 +1,5 @@
 //
-//  FeedItem.swift
+//  FeedImage.swift
 //  EssentialFeed
 //
 //  Created by Parth Thakkar on 2023-12-02.

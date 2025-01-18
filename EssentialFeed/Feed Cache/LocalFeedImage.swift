@@ -1,5 +1,5 @@
 //
-//  LocalFeedItem.swift
+//  LocalFeedImage.swift
 //  EssentialFeed
 //
 //  Created by Parth Thakkar on 2024-12-14.
