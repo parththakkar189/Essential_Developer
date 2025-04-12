@@ -8,12 +8,19 @@
 import XCTest
 
 final class LoadFeedFromCacheUserCaseTests: XCTestCase {
-
+    
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         XCTAssertEqual(store.receivedMessages, [])
     }
     
+    func test_load_requestCacheRetrieval() {
+        let (sut, store) = makeSUT()
+        
+        sut.load()
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
     
     // MARK: - Helper
     
@@ -27,7 +34,5 @@ final class LoadFeedFromCacheUserCaseTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(store, file: file, line: line)
         return (sut, store)
-    }
-    
-    
+    }    
 }

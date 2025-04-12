@@ -13,6 +13,7 @@ public protocol FeedStore {
     
     func deleteCachedFeed(completion: @escaping ErrorCompletionHandler)
     func insert(_ feed: [LocalFeedImage ], timeStamp: Date, completion: @escaping ErrorCompletionHandler)
+    func retrieve()
 }
 
 
