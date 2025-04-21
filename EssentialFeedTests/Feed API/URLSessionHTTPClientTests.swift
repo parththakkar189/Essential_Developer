@@ -5,7 +5,6 @@
 //  Created by Parth Thakkar on 2024-11-09.
 //
 import XCTest
-import EssentialFeed
 
 class URLSessionHTTPClientTests: XCTestCase {
     
