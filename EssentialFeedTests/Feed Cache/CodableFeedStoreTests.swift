@@ -53,9 +53,15 @@ class CodableFeedStore {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
         }
-        let decode = JSONDecoder()
-        let cache = try! decode.decode(Cache.self, from: data)
-        completion(.found(feed: cache.localFeed, timestamp: cache.timeStamp))
+        do {
+            let decode = JSONDecoder()
+            let cache = try decode.decode(Cache.self, from: data)
+            completion(.found(feed: cache.localFeed, timestamp: cache.timeStamp))
+        } catch {
+            completion(.failure(error))
+        }
+        
+        
     }
     
     func insert(_ feed: [LocalFeedImage ], timeStamp: Date, completion: @escaping FeedStore.ErrorCompletionHandler) {
@@ -112,13 +118,20 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetriveTwice: .found(feed: feed, timestamp: timeStamp))
     }
     
+    func test_retrieve_deliversFailureOnRetrievalError() {
+        let sut = makeSUT()
+        
+        try! "invalid data".write(to: testSpecifiStoreURL(), atomically: false, encoding: .utf8)
+        
+        expect(sut, toRetrive: .failure(anyError()))
+    }
     // MARK: - Helpers
     
     private func makeSUT(
         file: StaticString = #filePath,
         line: UInt = #line
     ) -> CodableFeedStore {
-        let storeURL = tetsSpecifiStoreURL()
+        let storeURL = testSpecifiStoreURL()
         let sut = CodableFeedStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
@@ -134,7 +147,8 @@ class CodableFeedStoreTests: XCTestCase {
         
         sut.retrieve { retrievedResult in
             switch (expectedResult, retrievedResult) {
-            case (.empty, .empty):
+            case (.empty, .empty),
+                (.failure, .failure):
                 break
             case let(.found(expected), .found(retrieved)):
                 XCTAssertEqual(retrieved.feed, expected.feed, file: file, line: line)
@@ -168,7 +182,7 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetrive: expectedResult)
     }
     
-    private func tetsSpecifiStoreURL() -> URL {
+    private func testSpecifiStoreURL() -> URL {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
     }
     
@@ -181,6 +195,6 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     private func deleteStoreArtifacts() {
-        try? FileManager.default.removeItem(at: tetsSpecifiStoreURL())
+        try? FileManager.default.removeItem(at: testSpecifiStoreURL())
     }
 }
