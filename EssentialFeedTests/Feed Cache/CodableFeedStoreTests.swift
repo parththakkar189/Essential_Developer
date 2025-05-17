@@ -91,18 +91,13 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetriveTwice: .empty)
     }
     
-    func test_retriveAfterInsertingToEmptyCache_deliversInsertedValues() {
+    
+    func test_retrive_deliversFoundValuesOnNonEmptyCache() {
         let sut = makeSUT()
         let feed = uniqueImageFeed().local
         let timeStamp = Date()
-       
-        let exp = expectation(description: "Wait for cache retrieval")
-        sut.insert(feed, timeStamp: timeStamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
-            exp.fulfill()
-        }
         
-        wait(for:[exp], timeout: 1.0)
+        insert(cache: (feed, timeStamp), to: sut)
         
         expect(sut, toRetrive: .found(feed: feed, timestamp: timeStamp))
     }
@@ -111,13 +106,8 @@ class CodableFeedStoreTests: XCTestCase {
         let sut = makeSUT()
         let feed = uniqueImageFeed().local
         let timeStamp = Date()
-        let exp = expectation(description: "Wait for cache retrieval")
-        sut.insert(feed, timeStamp: timeStamp) { insertionError in
-            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
-            exp.fulfill()
-        }
         
-        wait(for:[exp], timeout: 1.0)
+        insert(cache: (feed, timeStamp), to: sut)
         
         expect(sut, toRetriveTwice: .found(feed: feed, timestamp: timeStamp))
     }
@@ -156,6 +146,16 @@ class CodableFeedStoreTests: XCTestCase {
         }
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    private func insert(cache: (feed: [LocalFeedImage], timeStamp: Date), to sut: CodableFeedStore) {
+        let exp = expectation(description: "Wait for cache retrieval")
+        sut.insert(cache.feed, timeStamp: cache.timeStamp) { insertionError in
+            XCTAssertNil(insertionError, "Expected feed to be inserted successfully")
+            exp.fulfill()
+        }
+        
+        wait(for:[exp], timeout: 1.0)
     }
     
     private func expect(
