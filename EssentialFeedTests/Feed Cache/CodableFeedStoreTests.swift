@@ -7,7 +7,7 @@
 
 import XCTest
 
-class CodableFeedStore {
+class CodableFeedStore: FeedStore {
     
     private struct Cache: Codable {
         let feed: [CodableFeedImage]
@@ -49,7 +49,7 @@ class CodableFeedStore {
     
     // MARK: - Methods
     
-    func retrieve(completion: @escaping FeedStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.empty)
         }
@@ -64,7 +64,7 @@ class CodableFeedStore {
         
     }
     
-    func insert(_ feed: [LocalFeedImage ], timeStamp: Date, completion: @escaping FeedStore.ErrorCompletionHandler) {
+    func insert(_ feed: [LocalFeedImage ], timeStamp: Date, completion: @escaping ErrorCompletionHandler) {
         do {
             let encoder = JSONEncoder()
             let cache = Cache(feed: feed.map(CodableFeedImage.init), timeStamp: timeStamp)
@@ -77,7 +77,7 @@ class CodableFeedStore {
         
     }
     
-    func deleteCachedFeed(completion: @escaping FeedStore.ErrorCompletionHandler) {
+    func deleteCachedFeed(completion: @escaping ErrorCompletionHandler) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
             return completion(nil)
         }
@@ -184,7 +184,6 @@ class CodableFeedStoreTests: XCTestCase {
     
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wati for cache deletion")
         
         let deletionError = deleteCache(from: sut)
         XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
