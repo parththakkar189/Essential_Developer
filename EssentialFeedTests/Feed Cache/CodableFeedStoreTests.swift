@@ -7,40 +7,7 @@
 
 import XCTest
 
-protocol FeedStoreSpecs {
-    func test_retrive_deliversEmptyOnEmptyCache()
-    func test_retrive_hasNoSideEffectsOnEmptyCache()
-    func test_retrive_deliversFoundValuesOnNonEmptyCache()
-    func test_retrive_hasNoSideEffectsOnNonEmptyCache()
-    
-    func test_insert_deliversNoErrorOnEmptyCache()
-    func test_insert_deliversNoErrorOnNonEmptyCache()
-    func test_insert_overridesPerviouslyInsertedCacheValues()
-    
-    func test_delete_deliversNoErrorOnEmptyCache()
-    func test_delete_hasNoSideEffectsOnEmptyCache()
-    func test_delete_deliversNoErrorOnNonEmptyCache()
-    func test_delete_emptiesPreviouslyInsertedCache()
-    
-    func test_storeSideEffects_runSerially()
-}
-
-protocol FailableRetrieveFeedStoreSpecs {
-    func test_retrieve_deliversFailureOnRetrievalError()
-    func test_retrieve_hasNoSideEffectsOnFailure()
-}
-
-protocol FailableInsertFeedStoreSpecs {
-    func test_insert_deliversErrorOnInsertionError()
-    func test_insert_hasNoSideEffectsOnInsertionError()
-}
-
-protocol FailableDeleteFeedStoreSpecs {
-    func test_delete_deliversErrorOnDeletionErrro()
-    func test_delete_hasNoSideEffectsOnDeletionError()
-}
-
-class CodableFeedStoreTests: XCTestCase {
+class CodableFeedStoreTests: XCTestCase, FailableFeedStore {
     
     override func setUp() {
         super.setUp()
@@ -153,20 +120,20 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut, toRetrive: .empty)
     }
     
-    func test_delete_hasNoSideEffectsOnDeletionError() {
-        let sut = makeSUT()
-        
-        let deletionError = deleteCache(from: sut)
-        
-        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
-    }
-    
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
         
         deleteCache(from: sut)
         
         expect(sut, toRetrive: .empty)
+    }
+    
+    func test_delete_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
     }
     
     func test_delete_deliversNoErrorOnNonEmptyCache() {
@@ -186,6 +153,14 @@ class CodableFeedStoreTests: XCTestCase {
         deleteCache(from: sut)
         
         expect(sut, toRetrive: .empty)
+    }
+    
+    func test_delete_hasNoSideEffectsOnDeletionError() {
+        let sut = makeSUT()
+        
+        let deletionError = deleteCache(from: sut)
+        
+        XCTAssertNil(deletionError, "Expected empty cache deletion to succeed")
     }
     
     func test_delete_deliversErrorOnDeletionError() {
