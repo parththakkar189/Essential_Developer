@@ -67,6 +67,9 @@
 		B2FF19FA2DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */; };
 		B2FF19FB2DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */; };
 		B2FF19FC2DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */; };
+		B2FF1A012DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */; };
+		B2FF1A022DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */; };
+		B2FF1A032DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +124,7 @@
 		B2EF88DC2CE296F200F58C80 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI.xctestplan; sourceTree = "<group>"; };
 		B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpecs.swift; sourceTree = "<group>"; };
 		B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedStoreSpecs.swift"; sourceTree = "<group>"; };
+		B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveFeedStoreSepcs.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +252,7 @@
 		B27653892CE25688002EE55D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */,
 				B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */,
 				B2D91AA42DB6DAF8006322E1 /* SharedTestHelpers.swift */,
 				B27653882CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift */,
@@ -449,6 +454,7 @@
 				B276539C2CE2572D002EE55D /* EssentialFeedTests.swift in Sources */,
 				B264C9732D0E339900273D55 /* LocalFeedImage.swift in Sources */,
 				B27653952CE25688002EE55D /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
+				B2FF1A012DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */,
 				B27653962CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2D91AA32DB6D9FF006322E1 /* FeedCacheTestHelpers.swift in Sources */,
 				B2DA17472D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
@@ -481,6 +487,7 @@
 				B276539B2CE2572D002EE55D /* EssentialFeedTests.swift in Sources */,
 				B264C9722D0E339900273D55 /* LocalFeedImage.swift in Sources */,
 				B27653902CE25688002EE55D /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
+				B2FF1A022DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */,
 				B27653912CE25688002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
 				B2D91AA22DB6D9FF006322E1 /* FeedCacheTestHelpers.swift in Sources */,
 				B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
@@ -507,6 +514,7 @@
 				B27653B32CE27625002EE55D /* EssentialFeedEndToEndTests.swift in Sources */,
 				B2FF19FC2DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift in Sources */,
 				B27653B42CE27E0D002EE55D /* XCTTestCase+MemoryLeakHelper.swift in Sources */,
+				B2FF1A032DDBFE1700CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift in Sources */,
 				B2D91AA62DB6DAFE006322E1 /* SharedTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
