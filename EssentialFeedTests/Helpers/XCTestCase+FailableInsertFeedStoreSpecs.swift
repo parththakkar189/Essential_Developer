@@ -8,7 +8,7 @@
 import XCTest
 
 extension FailableInsertFeedStoreSpecs where Self: XCTestCase {
-    func assertThatInserDeliversErrorOnInsertionError(
+    func assertThatInsertDeliversErrorOnInsertionError(
         on sut: FeedStore,
         file: StaticString = #file,
         line: UInt = #line
