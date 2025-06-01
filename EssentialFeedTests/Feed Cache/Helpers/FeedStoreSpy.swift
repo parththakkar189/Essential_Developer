@@ -7,6 +7,7 @@
 
 
 import Foundation
+import EssentialFeed
 
 class FeedStoreSpy: FeedStore {
     typealias ErrorCompletionHandler = (Error?) -> Void
