@@ -55,7 +55,6 @@
 		B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DA17452D062B26008FAB76 /* CacheFeedUseCaseTests.swift */; };
 		B2E09C642DD91DBA001705A5 /* CodableFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E09C622DD91DB2001705A5 /* CodableFeedStoreTests.swift */; };
 		B2E09C662DD94530001705A5 /* CodableFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E09C652DD94530001705A5 /* CodableFeedStore.swift */; };
-		B2E09C672DD94530001705A5 /* CodableFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E09C652DD94530001705A5 /* CodableFeedStore.swift */; };
 		B2EF88DD2CE296F200F58C80 /* CI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B2EF88DC2CE296F200F58C80 /* CI.xctestplan */; };
 		B2FF19F72DDBF7A100CDF8F9 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */; };
 		B2FF19F82DDBF7A100CDF8F9 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */; };
@@ -282,14 +281,22 @@
 		B2A32CD52DED1B54003126ED /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
+				B2A32CE12DED20D0003126ED /* Codable */,
 				B2A32CDC2DED1CD9003126ED /* ManagedFeedImage.swift */,
 				B2A32CD92DED1CB9003126ED /* ManagedCache.swift */,
 				B2A32CD62DED1BB6003126ED /* CoreDataHelpers.swift */,
 				B2FF1A112DDC07B000CDF8F9 /* CoreDataFeedStore.swift */,
 				B2FF1A172DE3E44C00CDF8F9 /* FeedStore.xcdatamodeld */,
-				B2E09C652DD94530001705A5 /* CodableFeedStore.swift */,
 			);
 			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		B2A32CE12DED20D0003126ED /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				B2E09C652DD94530001705A5 /* CodableFeedStore.swift */,
+			);
+			path = Codable;
 			sourceTree = "<group>";
 		};
 		B2DA17442D062B04008FAB76 /* Feed Cache */ = {
@@ -512,7 +519,6 @@
 				B2FF1A0F2DDC074F00CDF8F9 /* CoreDataFeedStoreTests.swift in Sources */,
 				B2D91AA22DB6D9FF006322E1 /* FeedCacheTestHelpers.swift in Sources */,
 				B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */,
-				B2E09C672DD94530001705A5 /* CodableFeedStore.swift in Sources */,
 				B264C96A2D0E1D4A00273D55 /* LocalFeedLoader.swift in Sources */,
 				B25C4A842D3C5AAD00B54C04 /* FeedStoreSpy.swift in Sources */,
 				B2D91AA02DB6B4CB006322E1 /* ValidateFeedCacheUseCaseTests.swift in Sources */,
