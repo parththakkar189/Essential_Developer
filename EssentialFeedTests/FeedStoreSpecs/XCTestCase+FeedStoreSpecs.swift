@@ -39,7 +39,7 @@ extension FeedStoreSpecs where Self: XCTestCase {
         expect(sut, toRetrieve: .found(feed: feed, timestamp: timeStamp))
     }
     
-    func assertThatRetriveHasNoSideEffectsOnNonEmptyCache(
+    func assertThatRetrieveHasNoSideEffectsOnNonEmptyCache(
         on sut: FeedStore,
         file: StaticString = #file,
         line: UInt = #line
