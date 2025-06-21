@@ -12,9 +12,11 @@ public typealias CachedFeed = (feed: [LocalFeedImage], timestamp: Date)
 
 public protocol FeedStore {
     
-    typealias Result = Swift.Result<CachedFeed?, Error>
-    typealias ErrorCompletionHandler = (Error?) -> Void
-    typealias RetrievalCompletion = (Result) -> Void
+    typealias OperationResult = Swift.Result<Void, Error>
+    typealias ErrorCompletionHandler = (OperationResult) -> Void
+    
+    typealias RetrievalResult = Swift.Result<CachedFeed?, Error>
+    typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     /// The completion handler can be invoked in any thread.
     /// Clients are responsible to dispatch to appropriate threads, if needed.
