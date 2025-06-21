@@ -166,7 +166,7 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         }
         private var messages = [(url: URL, completion: (Result) -> Void)]()
         
-        func get(from url: URL, completion: @escaping (Result) -> Void) {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
             messages.append((url, completion))
         }
         
