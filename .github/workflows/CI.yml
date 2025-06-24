@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Cache Derived Data
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/Library/Developer/Xcode/DerivedData
           key: ${{ runner.os }}-xcode-${{ hashFiles('**/*.xcodeproj') }}
@@ -60,14 +60,14 @@ jobs:
 
       - name: Archive Derived Data
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: DerivedData-${{ matrix.platform }}
           path: ~/Library/Developer/Xcode/DerivedData
 
       - name: Archive Logs
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: xcodebuild-logs-${{ matrix.platform }}
           path: ~/Library/Logs
