@@ -33,15 +33,27 @@ jobs:
     - name: List EssentialFeed directory contents
       run: ls -al EssentialFeed
 
-    - name: Build and test
+    - name: Build and test macOS target
       run: |
         /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
           -project EssentialFeed.xcodeproj \
-          -scheme CI \
+          -scheme CI_macOS \
           CODE_SIGN_IDENTITY= \
           CODE_SIGNING_REQUIRED=NO \
           -sdk macosx \
           -destination platform=macOS \
           ONLY_ACTIVE_ARCH=YES
+          
+    - name: Build and test iOS target
+      run: |
+        /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
+          -project EssentialFeed.xcodeproj \
+          -scheme CI_iOS \
+          CODE_SIGN_IDENTITY= \
+          CODE_SIGNING_REQUIRED=NO \
+          -sdk iphonesimulator \
+          -destination platform=iOS Simulator \
+          -os=12.2 \
+          ONLY_ACTIVE_ARCH=YES          
       env:
         IDEPackageSupportUseBuiltinSCM: YES
