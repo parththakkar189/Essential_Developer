@@ -54,6 +54,7 @@ jobs:
           -sdk iphonesimulator \
           -destination platform=iOS Simulator \
           -os=12.2 \
+          -name=iphone 16
           ONLY_ACTIVE_ARCH=YES          
       env:
         IDEPackageSupportUseBuiltinSCM: YES
