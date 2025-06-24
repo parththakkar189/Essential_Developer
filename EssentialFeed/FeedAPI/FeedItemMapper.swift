@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-
-
 internal final class FeedItemMapper {
     
     private struct Root: Decodable {
