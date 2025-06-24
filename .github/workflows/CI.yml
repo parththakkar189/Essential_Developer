@@ -53,8 +53,6 @@ jobs:
             /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
               -project EssentialFeed.xcodeproj \
               -scheme CI_iOS \
-              CODE_SIGN_IDENTITY="" \
-              CODE_SIGNING_REQUIRED=NO \
               -sdk iphonesimulator \
               -destination "platform=iOS Simulator,name=iPhone 16 Pro,OS=18.2" \
               ONLY_ACTIVE_ARCH=YES
