@@ -47,6 +47,7 @@
 		B2D91AAA2DB6EA8E006322E1 /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D91AA82DB6EA8E006322E1 /* FeedCachePolicy.swift */; };
 		B2DA17462D062B26008FAB76 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2DA17452D062B26008FAB76 /* CacheFeedUseCaseTests.swift */; };
 		B2EF88DD2CE296F200F58C80 /* CI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B2EF88DC2CE296F200F58C80 /* CI.xctestplan */; };
+		B2F8CA012E0B3F7300642D00 /* EssentialFeedEndToEndTests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B2F8CA002E0B3F2100642D00 /* EssentialFeedEndToEndTests.xctestplan */; };
 		B2FF19F72DDBF7A100CDF8F9 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */; };
 		B2FF19F82DDBF7A100CDF8F9 /* FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */; };
 		B2FF19FB2DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */; };
@@ -116,6 +117,7 @@
 		B2D91AA82DB6EA8E006322E1 /* FeedCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCachePolicy.swift; sourceTree = "<group>"; };
 		B2DA17452D062B26008FAB76 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		B2EF88DC2CE296F200F58C80 /* CI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI.xctestplan; sourceTree = "<group>"; };
+		B2F8CA002E0B3F2100642D00 /* EssentialFeedEndToEndTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EssentialFeedEndToEndTests.xctestplan; path = EssentialFeedEndToEndTests/EssentialFeedEndToEndTests.xctestplan; sourceTree = "<group>"; };
 		B2FF19F62DDBF7A100CDF8F9 /* FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpecs.swift; sourceTree = "<group>"; };
 		B2FF19F92DDBF89A00CDF8F9 /* XCTestCase+FeedStoreSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FeedStoreSpecs.swift"; sourceTree = "<group>"; };
 		B2FF1A002DDBFE0200CDF8F9 /* XCTestCase+FailableRetrieveFeedStoreSepcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FailableRetrieveFeedStoreSepcs.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		080EDEE721B6DA7E00813479 = {
 			isa = PBXGroup;
 			children = (
+				B2F8CA002E0B3F2100642D00 /* EssentialFeedEndToEndTests.xctestplan */,
 				B2C7EE912DF65784006825E7 /* EssentialFeedCacheIntegrationTests.xctestplan */,
 				B2EF88D82CE2839F00F58C80 /* CI */,
 				080EDEF321B6DA7E00813479 /* EssentialFeed */,
@@ -480,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F8CA012E0B3F7300642D00 /* EssentialFeedEndToEndTests.xctestplan in Resources */,
 				B27653922CE25688002EE55D /* EssentialFeedTests.xctestplan in Resources */,
 				B2EF88DD2CE296F200F58C80 /* CI.xctestplan in Resources */,
 			);
@@ -866,14 +870,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.parththakkar.EssentialFeedEndToEndTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -886,13 +894,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.parththakkar.EssentialFeedEndToEndTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
