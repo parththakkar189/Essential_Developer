@@ -1,60 +1,73 @@
-name: CI-macOS
+name: CI-macOS-iOS
 
-# Controls when the action will run.
-# Triggers the workflow on pull request events but only for the master branch.
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+env:
+  IDEPackageSupportUseBuiltinSCM: YES
+  CODE_SIGN_IDENTITY: ""
+  CODE_SIGNING_REQUIRED: NO
+
 jobs:
   build-and-test:
-    # The type of runner that the job will run on
     runs-on: macos-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        platform: [macOS, iOS]
 
-    timeout-minutes: 8
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Select Xcode
-      run: sudo xcode-select -switch /Applications/Xcode.app
-      
-    - name: Xcode version
-      run: /usr/bin/xcodebuild -version
+      - name: Cache Derived Data
+        uses: actions/cache@v3
+        with:
+          path: ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-xcode-${{ hashFiles('**/*.xcodeproj') }}
 
-    - name: List root directory contents
-      run: ls -al
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode.app
 
-    - name: List EssentialFeed directory contents
-      run: ls -al EssentialFeed
+      - name: Xcode version
+        run: /usr/bin/xcodebuild -version
 
-    - name: Build and test macOS target
-      run: |
-        /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
-          -project EssentialFeed.xcodeproj \
-          -scheme CI_macOS \
-          CODE_SIGN_IDENTITY= \
-          CODE_SIGNING_REQUIRED=NO \
-          -sdk macosx \
-          -destination platform=macOS \
-          ONLY_ACTIVE_ARCH=YES
-          
-    - name: Build and test iOS target
-      run: |
-        /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
-          -project EssentialFeed.xcodeproj \
-          -scheme CI_iOS \
-          CODE_SIGN_IDENTITY= \
-          CODE_SIGNING_REQUIRED=NO \
-          -sdk iphonesimulator \
-          -destination platform=iOS Simulator \
-          -os=12.2 \
-          -name=iphone 16
-          ONLY_ACTIVE_ARCH=YES          
-      env:
-        IDEPackageSupportUseBuiltinSCM: YES
+      - name: List root directory contents
+        run: ls -al
+
+      - name: List EssentialFeed directory contents
+        run: ls -al EssentialFeed
+
+      - name: Build and test ${{ matrix.platform }} target
+        run: |
+          if [ "${{ matrix.platform }}" == "macOS" ]; then
+            /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
+              -project EssentialFeed.xcodeproj \
+              -scheme CI_macOS \
+              -sdk macosx \
+              -destination platform=macOS \
+              ONLY_ACTIVE_ARCH=YES
+          else
+            /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild clean build test \
+              -project EssentialFeed.xcodeproj \
+              -scheme CI_iOS \
+              -sdk iphonesimulator \
+              -destination "platform=iOS Simulator,OS=12.2,name=iPhone 16" \
+              ONLY_ACTIVE_ARCH=YES
+          fi
+
+      - name: Archive Derived Data
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: DerivedData-${{ matrix.platform }}
+          path: ~/Library/Developer/Xcode/DerivedData
+
+      - name: Archive Logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: xcodebuild-logs-${{ matrix.platform }}
+          path: ~/Library/Logs
