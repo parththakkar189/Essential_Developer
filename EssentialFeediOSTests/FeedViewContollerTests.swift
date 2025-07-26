@@ -21,14 +21,17 @@ final class FeedViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl = UIRefreshControl()
+        refreshControl = replaceRefreshControlWIthFakeForiOS17Support()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
         refreshControl?.beginRefreshing()
         load()
     }
     
     @objc func load() {
-        loader?.load { _ in }
+        loader?.load { [weak self] _ in
+            guard self != nil else { return }
+            self?.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -68,6 +71,15 @@ final class FeedViewContollerTests: XCTestCase {
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
+    
+    func test_viewDidLoad_hidesLoadingIndicatorOnLoaderCompletion() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        loader.completeFeedLoading()
+        
+        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+    }
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
@@ -81,10 +93,17 @@ final class FeedViewContollerTests: XCTestCase {
     // MARK: - LoaderSpy
     
     class LoaderSpy: FeedLoader {
-        private(set) var loadCallCount: Int = 0
+        private var completions = [(FeedLoader.Result) -> Void]()
         
+        var loadCallCount: Int {
+            return completions.count
+        }
         func load(completion: @escaping (FeedLoader.Result) -> Void) {
-            loadCallCount += 1
+            completions.append(completion)
+        }
+        
+        func completeFeedLoading() {
+            completions[0](.success([]))
         }
     }
 }
@@ -96,5 +115,27 @@ private extension UIRefreshControl {
                     (target as NSObject).perform(Selector($0))
             }
         }
+    }
+}
+
+private class FakeRefreshControl: UIRefreshControl {
+    private var _isRefreshing: Bool = false
+    
+    override var isRefreshing: Bool {
+        return _isRefreshing
+    }
+    
+    override func beginRefreshing() {
+        _isRefreshing = true
+    }
+    
+    override func endRefreshing() {
+        _isRefreshing = false
+    }
+}
+
+private extension FeedViewController {
+    func replaceRefreshControlWIthFakeForiOS17Support() -> UIRefreshControl {
+        return FakeRefreshControl()
     }
 }
