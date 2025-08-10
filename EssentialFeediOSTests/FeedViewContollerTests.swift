@@ -146,6 +146,35 @@ final class FeedViewContollerTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for second image once loading is completed with error")
     }
     
+    func test_feedImageView_rendersImageLoadedFromURL() {
+        let imageZero = makeImage(url: URL(string: "http://url-0.com")!)
+        let imageOne = makeImage(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        
+        loader.completeFeedLoading(with: [imageZero, imageOne])
+        
+        let view0 = sut.simulateFeedImageViewVisible(at: 0)
+        let view1 = sut.simulateFeedImageViewVisible(at: 1)
+        
+        XCTAssertEqual(view0?.renderedImage, .none, "Expected no image for the first view while loading first image")
+        XCTAssertEqual(view1?.renderedImage, .none, "Exptected no image for second view while loading second image")
+        
+        let imageDataZero = UIImage.make(withColor: .red).pngData()!
+        
+        loader.completeImageLoading(with: imageDataZero, at: 0)
+        XCTAssertEqual(view0?.renderedImage, imageDataZero, "Expected image for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, .none, "Exptected no image state change for second view once first image loading compltes successfully")
+        
+        let imageDataOne = UIImage.make(withColor: .blue).pngData()!
+        
+        loader.completeImageLoading(with: imageDataOne, at: 1)
+
+        XCTAssertEqual(view0?.renderedImage, imageDataZero, "Expected no image change for first view once second image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, imageDataOne, "Expected image for second view once second image loading completes successfully")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
@@ -373,5 +402,22 @@ extension FeedImageCell {
     
     var descriptionText: String? {
         return descriptionLabel.text
+    }
+    
+    var renderedImage: Data? {
+        return feedImageView.image?.pngData()
+    }
+}
+
+private extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        
+        return UIGraphicsImageRenderer(size: rect.size, format: format).image { rendererContext in
+            color.setFill()
+            rendererContext.fill(rect)
+        }
     }
 }
