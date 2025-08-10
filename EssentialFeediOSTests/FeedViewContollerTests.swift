@@ -155,24 +155,49 @@ final class FeedViewContollerTests: XCTestCase {
         
         loader.completeFeedLoading(with: [imageZero, imageOne])
         
-        let view0 = sut.simulateFeedImageViewVisible(at: 0)
-        let view1 = sut.simulateFeedImageViewVisible(at: 1)
+        let viewZero = sut.simulateFeedImageViewVisible(at: 0)
+        let viewOne = sut.simulateFeedImageViewVisible(at: 1)
         
-        XCTAssertEqual(view0?.renderedImage, .none, "Expected no image for the first view while loading first image")
-        XCTAssertEqual(view1?.renderedImage, .none, "Exptected no image for second view while loading second image")
+        XCTAssertEqual(viewZero?.renderedImage, .none, "Expected no image for the first view while loading first image")
+        XCTAssertEqual(viewOne?.renderedImage, .none, "Exptected no image for second view while loading second image")
         
         let imageDataZero = UIImage.make(withColor: .red).pngData()!
         
         loader.completeImageLoading(with: imageDataZero, at: 0)
-        XCTAssertEqual(view0?.renderedImage, imageDataZero, "Expected image for first view once first image loading completes successfully")
-        XCTAssertEqual(view1?.renderedImage, .none, "Exptected no image state change for second view once first image loading compltes successfully")
+        XCTAssertEqual(viewZero?.renderedImage, imageDataZero, "Expected image for first view once first image loading completes successfully")
+        XCTAssertEqual(viewOne?.renderedImage, .none, "Exptected no image state change for second view once first image loading compltes successfully")
         
         let imageDataOne = UIImage.make(withColor: .blue).pngData()!
         
         loader.completeImageLoading(with: imageDataOne, at: 1)
 
-        XCTAssertEqual(view0?.renderedImage, imageDataZero, "Expected no image change for first view once second image loading completes successfully")
-        XCTAssertEqual(view1?.renderedImage, imageDataOne, "Expected image for second view once second image loading completes successfully")
+        XCTAssertEqual(viewZero?.renderedImage, imageDataZero, "Expected no image change for first view once second image loading completes successfully")
+        XCTAssertEqual(viewOne?.renderedImage, imageDataOne, "Expected image for second view once second image loading completes successfully")
+    }
+    
+    func test_feedImageViewRetryButton_isVisibileOnImageURLLoadError() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage(), makeImage()])
+        
+        let viewZero = sut.simulateFeedImageViewVisible(at: 0)
+        let viewOne = sut.simulateFeedImageViewVisible(at: 1)
+        
+        XCTAssertEqual(viewZero?.isShowingRetryAction, false, "Expected no retry button for first view while loading first image")
+        XCTAssertEqual(viewOne?.isShowingRetryAction, false, "Expected no retry button for second view while loading second image")
+        
+        let imageDataZero = UIImage.make(withColor: .red).pngData()!
+        
+        loader.completeImageLoading(with: imageDataZero, at: 0)
+        XCTAssertEqual(viewZero?.isShowingRetryAction, false, "Expected no retry button for first view once first image loading completes successfully")
+        XCTAssertEqual(viewOne?.isShowingRetryAction, false, "Expected no retry action state change for second view once first image loading completes successfully")
+        
+
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(viewZero?.isShowingRetryAction, false, "Expected no retry button for first view once second image loading completes successfully")
+        XCTAssertEqual(viewOne?.isShowingRetryAction, true, "Expected retry button for second view once second image loading completes with error")
+        
     }
     
     // MARK: - Helpers
@@ -394,6 +419,10 @@ extension FeedImageCell {
     
     var isShowingImageLoadingIndicator: Bool {
         return feedImageContainer.isShimmering
+    }
+    
+    var isShowingRetryAction: Bool {
+        return !feedImageRetryButton.isHidden
     }
     
     var locationText: String? {
