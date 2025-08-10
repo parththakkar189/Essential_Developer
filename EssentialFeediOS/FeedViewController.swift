@@ -77,8 +77,11 @@ final public class FeedViewController: UITableViewController {
         cell.locationContainer.isHidden = (cellModel.location == nil)
         cell.locationLabel.text = cellModel.location
         cell.descriptionLabel.text = cellModel.description
+        cell.feedImageView.image = nil
         cell.feedImageContainer.startAnimating()
         tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.url) { [cell] result in
+            let data = try? result.get()
+            cell.feedImageView.image = data.map(UIImage.init) ?? nil
             cell.feedImageContainer.stopAnimating()
         }
         return cell
