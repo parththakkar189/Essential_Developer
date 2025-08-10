@@ -14,6 +14,7 @@ public class FeedImageCell: UITableViewCell {
     public let descriptionLabel = UILabel()
     public let feedImageContainer = UIView()
     public let feedImageView = UIImageView()
+    public let feedImageRetryButton = UIButton()
     
     public override func awakeFromNib() {
         super.awakeFromNib()
