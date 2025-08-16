@@ -80,13 +80,19 @@ final public class FeedViewController: UITableViewController {
         cell.feedImageView.image = nil
         cell.feedImageRetryButton.isHidden = true
         cell.feedImageContainer.startAnimating()
-        tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.url) { [cell] result in
-            let data = try? result.get()
-            let image = data.map(UIImage.init) ?? nil
-            cell.feedImageView.image = image
-            cell.feedImageRetryButton.isHidden = (image != nil)
-            cell.feedImageContainer.stopAnimating()
+        let loadImage = { [weak self, weak cell] in
+            guard let self = self, let cell = cell else { return }
+            self.tasks[indexPath] = self.imageLoader?.loadImageData(from: cellModel.url) { [cell] result in
+                let data = try? result.get()
+                let image = data.map(UIImage.init) ?? nil
+                cell.feedImageView.image = image
+                cell.feedImageRetryButton.isHidden = (image != nil)
+                cell.feedImageContainer.stopAnimating()
+            }
         }
+        
+        cell.onRetry = loadImage
+        loadImage()
         return cell
     }
     
