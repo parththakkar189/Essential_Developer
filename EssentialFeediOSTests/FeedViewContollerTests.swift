@@ -239,6 +239,21 @@ final class FeedViewContollerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url, imageZero.url, imageOne.url], "Expected fourth image URL request for first view once its retry action is initiated")
     }
     
+    func test_feedImageView_preloadsImageURLWhenNearVisible() {
+        let imageZero = makeImage(url: URL(string: "http://url-0.com")!)
+        let imageOne = makeImage(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [imageZero, imageOne])
+        XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is nearly visible")
+        
+        sut.simulateFeedImageViewNearVisibile(at: 0)
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url], "Expecated first image URL request once first image is near visible")
+        
+        sut.simulateFeedImageViewNearVisibile(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url], "Expecated second image URL request once second image is near visible")
+    }
     // MARK: - Helpers
     
     private func makeSUT(
@@ -428,6 +443,12 @@ private extension FeedViewController {
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         feedImageView(at: index) as? FeedImageCell
+    }
+    
+    func simulateFeedImageViewNearVisibile(at row: Int) {
+        let ds = tableView.prefetchDataSource
+        let index = IndexPath(row: row, section: feedImagesSection)
+        ds?.tableView(tableView, prefetchRowsAt: [index])
     }
     
     func numberOfRenderedFeedImageViews() -> Int {
