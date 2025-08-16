@@ -8,7 +8,7 @@
 import EssentialFeed
 import UIKit
 
-final class FeedImageCelController {
+final class FeedImageCellController {
     private var task: FeedImageDataLoaderTask?
     private let model: FeedImage
     private let imageLoader: FeedImageDataLoader
@@ -49,7 +49,7 @@ final class FeedImageCelController {
     func preload() {
         task = imageLoader.loadImageData(from: model.url) { _ in }
     }
-    deinit {
+    func cancelLoad() {
         task?.cancel()
     }
 }
