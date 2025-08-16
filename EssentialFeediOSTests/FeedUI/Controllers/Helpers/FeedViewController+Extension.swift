@@ -42,7 +42,8 @@ extension FeedViewController {
                 fake.addTarget(target, action: Selector(action), for: .valueChanged)
             }
         }
-        refreshControl = fake
+        refreshController?.view = fake
+        refreshControl = refreshController?.view
     }
     
     func simulateUserInitiatedFeedReload() {
@@ -85,3 +86,16 @@ extension FeedViewController {
         delegate?.tableView?(tableView, didEndDisplaying: view!, forRowAt: index)
     }
 }
+
+//extension FeedRefreshViewController {
+//    func replaceRefreshControlWIthFakeForiOS17Support() {
+//        // Force lazy property initialization
+//        let fake = FakeRefreshControl()
+//        view.allTargets.forEach { target in
+//            view.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach { action in
+//                fake.addTarget(target, action: Selector(action), for: .valueChanged)
+//            }
+//        }
+//        view = fake
+//    }
+//}
