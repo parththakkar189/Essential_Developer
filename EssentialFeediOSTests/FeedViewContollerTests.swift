@@ -216,6 +216,29 @@ final class FeedViewContollerTests: XCTestCase {
         XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry button for first view once first image loading completes with invalid image data")
     }
     
+    func test_feedImageViewRetryAction_retriesImageLoad() {
+        let imageZero = makeImage(url: URL(string: "http://url-0.com")!)
+        let imageOne = makeImage(url: URL(string: "http://url-1.com")!)
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [imageZero, imageOne])
+        
+        let viewZero = sut.simulateFeedImageViewVisible(at: 0)
+        let viewOne = sut.simulateFeedImageViewVisible(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url], "Expected two image URL requests for the two visible views")
+        
+        loader.completeImageLoadingWithError(at: 0)
+        loader.completeImageLoadingWithError(at: 1)
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url], "Expected no new image URL requests until retry actions are initiated")
+
+        viewZero?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url, imageZero.url], "Expected third image URL request for first view once its retry action is initiated")
+        
+        viewOne?.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url, imageZero.url, imageOne.url], "Expected fourth image URL request for first view once its retry action is initiated")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
@@ -373,6 +396,10 @@ private extension FeedViewController {
         refreshControl?.isRefreshing == true
     }
 
+    private var feedImagesSection: Int {
+        return 0
+    }
+
     // MARL: Methods
     
     func simulateAppearance() {
@@ -405,10 +432,6 @@ private extension FeedViewController {
     
     func numberOfRenderedFeedImageViews() -> Int {
         return tableView.numberOfRows(inSection: feedImagesSection)
-    }
-    
-    private var feedImagesSection: Int {
-        return 0
     }
     
     func feedImageView(at row: Int) -> UITableViewCell? {
@@ -452,6 +475,10 @@ extension FeedImageCell {
     var renderedImage: Data? {
         return feedImageView.image?.pngData()
     }
+    
+    func simulateRetryAction() {
+        feedImageRetryButton.simulateTap()
+    }
 }
 
 private extension UIImage {
@@ -463,6 +490,16 @@ private extension UIImage {
         return UIGraphicsImageRenderer(size: rect.size, format: format).image { rendererContext in
             color.setFill()
             rendererContext.fill(rect)
+        }
+    }
+}
+
+private extension UIButton {
+    func simulateTap() {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: .touchUpInside)?.forEach {
+                    (target as NSObject).perform(Selector($0))
+            }
         }
     }
 }
