@@ -9,6 +9,7 @@ import UIKit
 import EssentialFeed
 
 // MARK: FeedViewController
+
 final public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     public var refreshController: FeedRefreshViewController?
