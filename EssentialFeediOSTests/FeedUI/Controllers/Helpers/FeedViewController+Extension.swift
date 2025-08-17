@@ -42,8 +42,8 @@ extension FeedViewController {
                 fake.addTarget(target, action: Selector(action), for: .valueChanged)
             }
         }
+        refreshControl = fake
         refreshController?.view = fake
-        refreshControl = refreshController?.view
     }
     
     func simulateUserInitiatedFeedReload() {
