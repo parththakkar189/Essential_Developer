@@ -31,6 +31,10 @@ final class FeedPresenter {
     private let view: FeedView
     private let loadingView: FeedLoadingView
     
+    static var title: String {
+        "My Feed"
+    }
+    
     init(
         view: FeedView,
         loadingView: FeedLoadingView
