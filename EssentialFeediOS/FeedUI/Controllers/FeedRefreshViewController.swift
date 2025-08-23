@@ -16,30 +16,21 @@ protocol FeedRefreshViewControllerDelegate {
 // MARK: FeedRefreshViewController
 
 public final class FeedRefreshViewController: NSObject, FeedLoadingView {
-    public lazy var view: UIRefreshControl = loadView()
+    @IBOutlet public var view: UIRefreshControl?
     
-    private let delegate: FeedRefreshViewControllerDelegate
-    
-    init(delegate: FeedRefreshViewControllerDelegate) {
-        self.delegate = delegate
-    }
+    var delegate: FeedRefreshViewControllerDelegate?
 
     func display(_ viewModel: FeedLoadingViewModel) {
         if viewModel.isLoading {
-            self.view.beginRefreshing()
+            view?.beginRefreshing()
         } else {
-            self.view.endRefreshing()
+            view?.endRefreshing()
         }
  
     }
-    fileprivate func loadView() -> UIRefreshControl {
-        let view = UIRefreshControl()
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
-    }
     
-    @objc func refresh() {
-        delegate.didRequestFeedRefresh()
+    @IBAction func refresh() {
+        delegate?.didRequestFeedRefresh()
     }
 }
 
