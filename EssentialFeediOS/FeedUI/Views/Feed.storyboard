@@ -120,6 +120,7 @@
                         <connections>
                             <outlet property="dataSource" destination="Loa-EI-C4p" id="R9B-Be-tKf"/>
                             <outlet property="delegate" destination="Loa-EI-C4p" id="MbW-ax-DE3"/>
+                            <outlet property="prefetchDataSource" destination="Loa-EI-C4p" id="ace-8x-3b6"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Feed" id="hNP-Xi-Csx"/>
