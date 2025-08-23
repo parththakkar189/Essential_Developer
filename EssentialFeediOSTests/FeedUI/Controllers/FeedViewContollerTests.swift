@@ -271,6 +271,18 @@ final class FeedViewContollerTests: XCTestCase {
         XCTAssertEqual(loader.loadedImageURLs, [imageZero.url, imageOne.url], "Expecated second image URL request once second image is near visible")
     }
     
+    func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibileAnymore() {
+        let(sut, loader) = makeSUT()
+        sut.simulateAppearance()
+        loader.completeFeedLoading(with: [makeImage()])
+        
+        let view = sut.simulateFeedImageViewNotVisible(at: 0)
+        
+        loader.completeImageLoading(with: anyImageData())
+        
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(
@@ -300,6 +312,10 @@ final class FeedViewContollerTests: XCTestCase {
         )
     }
     
+    fileprivate func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
+    }
+
     private func assertThat(
         _ sut: FeedViewController,
         isRendering feed: [FeedImage],
