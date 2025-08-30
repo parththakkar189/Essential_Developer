@@ -6,6 +6,15 @@
 //
 
 import XCTest
+import EssentialFeed
+
+struct FeedViewModel {
+    let feed: [FeedImage]
+}
+
+protocol FeedView {
+    func display(_ viewModel: FeedViewModel)
+}
 
 protocol FeedLoadingView {
     func display(_ viewModel: FeedLoadingViewModel)
@@ -28,13 +37,16 @@ struct FeedErrorViewModel {
 }
 
 final class FeedPresenter {
+    private let view: FeedView
     private let loadingView: FeedLoadingView
     private let errorView: FeedErrorView
     
     init(
+        view: FeedView,
         loadingView: FeedLoadingView,
         errorView: FeedErrorView
     ) {
+        self.view = view
         self.loadingView = loadingView
         self.errorView = errorView
     }
@@ -42,6 +54,11 @@ final class FeedPresenter {
     func didStartLoadingFeed() {
         errorView.display(.init(errorMessage: .none))
         loadingView.display(FeedLoadingViewModel(isLoading: true))
+    }
+    
+    func didFinishLoadingFeed(with feed: [FeedImage]) {
+        view.display(FeedViewModel(feed: feed))
+        loadingView.display(FeedLoadingViewModel(isLoading: false))
     }
 }
 
@@ -67,6 +84,21 @@ final class FeedPresentationTests: XCTestCase {
         )
     }
     
+    func test_didFinishLoadingFeed_displaysFeedAndStopsLoading() {
+        let (sut , view) = makeSUT()
+        
+        let feed = uniqueImageFeed().models
+        
+        sut.didFinishLoadingFeed(with: feed)
+        
+        XCTAssertEqual(
+            view.messages,
+            [
+                .display(feed: feed),
+                .display(isLoading: false)
+            ]
+        )
+    }
     // MARK: - Helpers
     
     private func makeSUT(
@@ -75,6 +107,7 @@ final class FeedPresentationTests: XCTestCase {
     ) -> (sut: FeedPresenter, view: ViewSpy) {
         let view = ViewSpy()
         let presenter = FeedPresenter(
+            view: view,
             loadingView: view,
             errorView: view
         )
@@ -83,13 +116,19 @@ final class FeedPresentationTests: XCTestCase {
         return (presenter, view)
     }
     
-    private class ViewSpy: FeedErrorView, FeedLoadingView {
+    private class ViewSpy: FeedView, FeedLoadingView, FeedErrorView {
         enum Message: Equatable, Hashable {
             case display(errorMessage: String?)
             case display(isLoading: Bool)
+            case display(feed: [FeedImage])
         }
         
         private(set) var messages = Set<Message>()
+        
+        // MARK: - FeedView
+        func display(_ viewModel: FeedViewModel) {
+            messages.insert(.display(feed: viewModel.feed))
+        }
         
         // MARK: - FeedLoadingView
         func display(_ viewModel: FeedLoadingViewModel) {
