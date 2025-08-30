@@ -5,37 +5,7 @@
 //  Created by Parth Thakkar on 2025-08-30.
 //
 
-public struct FeedViewModel {
-    public let feed: [FeedImage]
-}
-
-public protocol FeedView {
-    func display(_ viewModel: FeedViewModel)
-}
-
-public protocol FeedLoadingView {
-    func display(_ viewModel: FeedLoadingViewModel)
-}
-
-public struct FeedLoadingViewModel {
-    public let isLoading: Bool
-}
-
-public protocol FeedErrorView {
-    func display(_ viewModel: FeedErrorViewModel)
-}
-
-public struct FeedErrorViewModel {
-    public let errorMessage: String?
-    
-    static var noError: FeedErrorViewModel? {
-        return FeedErrorViewModel(errorMessage: nil)
-    }
-    
-    static func error(errorMessage: String) -> FeedErrorViewModel {
-        return FeedErrorViewModel(errorMessage: errorMessage)
-    }
-}
+// MARK: - FeedPresenter
 
 public final class FeedPresenter {
     private let view: FeedView
