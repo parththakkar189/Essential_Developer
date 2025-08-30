@@ -24,6 +24,9 @@ extension FeedViewController {
         return 0
     }
 
+    var errorMessage: String? {
+        errorView.message
+    }
     // MARL: Methods
     
     func simulateAppearance() {
@@ -67,6 +70,11 @@ extension FeedViewController {
         let index = IndexPath(row: row, section: feedImagesSection)
         ds?.tableView?(tableView, cancelPrefetchingForRowsAt: [index])
     }
+    
+    func simulateTapOnErrorMessage() {
+        errorView.button.simulateTap()
+    }
+    
     func numberOfRenderedFeedImageViews() -> Int {
         return tableView.numberOfRows(inSection: feedImagesSection)
     }
