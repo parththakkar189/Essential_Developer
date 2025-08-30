@@ -2,7 +2,6 @@
   "sourceLanguage" : "en",
   "strings" : {
     "FEED_VIEW_CONNECTION_ERROR" : {
-      "comment" : "Não foi possível conectar com o servidor",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -26,7 +25,6 @@
       }
     },
     "FEED_VIEW_TITLE" : {
-      "comment" : "Title for the feed view",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
