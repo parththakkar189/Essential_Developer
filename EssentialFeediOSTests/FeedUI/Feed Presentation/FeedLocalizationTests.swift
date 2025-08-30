@@ -6,13 +6,14 @@
 //
 
 import XCTest
+import EssentialFeed
 @testable import EssentialFeediOS
 
 final class FeedLocalizationTests: XCTestCase {
     
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "Feed"
-        let presentationBundle = Bundle(for: Localized.self)
+        let presentationBundle = Bundle(for: FeedPresenter.self)
         let localizationBundles = allLocalizationBundles(in: presentationBundle)
         let localizationStringKeys = allLocalizedStringKeys(in: localizationBundles, table: table)
         

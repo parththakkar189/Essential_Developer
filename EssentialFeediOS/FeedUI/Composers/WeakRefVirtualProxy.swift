@@ -5,6 +5,7 @@
 //  Created by Parth Thakkar on 2025-08-23.
 //
 
+import EssentialFeed
 import Foundation
 import UIKit
 
