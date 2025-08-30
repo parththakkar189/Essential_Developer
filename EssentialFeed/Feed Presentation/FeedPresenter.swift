@@ -15,6 +15,7 @@ public final class FeedPresenter {
     public static var title: String {
         Localized.Feed.title
     }
+
     public init(
         view: FeedView,
         loadingView: FeedLoadingView,

@@ -47,7 +47,7 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
         delegate?.didRequestFeedRefresh()
     }
     
-    func display(_ viewModel: FeedLoadingViewModel) {
+    public func display(_ viewModel: FeedLoadingViewModel) {
         if viewModel.isLoading {
             refreshControl?.beginRefreshing()
         } else {
@@ -92,7 +92,7 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
 }
 
 extension FeedViewController: FeedErrorView {
-    func display(_ viewModel: FeedErrorViewModel) {
+    public func display(_ viewModel: FeedErrorViewModel) {
         if let errorMessage = viewModel.errorMessage {
             errorView.show(message: errorMessage)
         } else {

@@ -22,7 +22,7 @@ public final class FeedUIComposer {
         
         let feedViewController = FeedViewController.makeWith(
             delegate: presentationAdapter,
-            title: Localized.Feed.title
+            title: FeedPresenter.title
         )
         
         presentationAdapter.presenter = FeedPresenter(
