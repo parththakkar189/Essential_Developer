@@ -15,7 +15,8 @@ final class Localized {
 }
 extension Localized {
     enum Feed {
-        static var table: String { "Feed" }
+        static private var table: String { "Feed" }
+        
         static var title: String {
             NSLocalizedString(
                 "FEED_VIEW_TITLE",
@@ -98,6 +99,10 @@ final class FeedPresenter {
 }
 
 final class FeedPresentationTests: XCTestCase {
+    
+    func test_title_isLocalized() {
+        XCTAssertEqual(Localized.Feed.title, localized("FEED_VIEW_TITLE"))
+    }
     
     func test_init_doesNotSendMessagesToView() {
         let (_, view) = makeSUT()
