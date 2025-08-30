@@ -25,12 +25,21 @@ protocol FeedView {
     func display(_ viewModel: FeedViewModel)
 }
 
+protocol FeedErrorView {
+    func display(_ viewModel: FeedErrorViewModel)
+}
+
+struct FeedErrorViewModel {
+    let errorMessage: String?
+}
+
 // MARK: FeedViewModel
 
 final class FeedPresenter {
     private let view: FeedView
     private let loadingView: FeedLoadingView
-    
+    private let errorView: FeedErrorView
+
     static var title: String {
         NSLocalizedString(
             "FEED_VIEW_TITLE",
@@ -42,10 +51,12 @@ final class FeedPresenter {
     
     init(
         view: FeedView,
-        loadingView: FeedLoadingView
+        loadingView: FeedLoadingView,
+        errorView: FeedErrorView
     ) {
         self.view = view
         self.loadingView = loadingView
+        self.errorView = errorView
     }
     
     func didStartLoadingFeed() {
@@ -54,6 +65,7 @@ final class FeedPresenter {
                 self?.didStartLoadingFeed()
             }
         }
+        errorView.display(.init(errorMessage: .none))
         loadingView.display(FeedLoadingViewModel(isLoading: true))
     }
     
@@ -75,5 +87,6 @@ final class FeedPresenter {
             }
         }
         loadingView.display(FeedLoadingViewModel(isLoading: false))
+        errorView.display(.init(errorMessage: Localized.Feed.loadError))
     }
 }

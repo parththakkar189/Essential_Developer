@@ -12,7 +12,7 @@ final class FeedLocalizationTests: XCTestCase {
     
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "Feed"
-        let presentationBundle = Bundle(for: FeedViewController.self)
+        let presentationBundle = Bundle(for: Localized.self)
         let localizationBundles = allLocalizationBundles(in: presentationBundle)
         let localizationStringKeys = allLocalizedStringKeys(in: localizationBundles, table: table)
         

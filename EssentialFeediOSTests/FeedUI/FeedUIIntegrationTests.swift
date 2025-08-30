@@ -346,6 +346,33 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         wait(for: [exp], timeout: 1.0)
     }
+    
+    func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        XCTAssertEqual(sut.errorMessage, nil)
+     
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+    
+    func test_errorView_dismissedErrorOnTap() {
+        let (sut, loader) = makeSUT()
+        
+        sut.simulateAppearance()
+        XCTAssertEqual(sut.errorMessage, nil)
+     
+        loader.completeFeedLoadingWithError(at: 0)
+        XCTAssertEqual(sut.errorMessage, localized("FEED_VIEW_CONNECTION_ERROR"))
+        
+        sut.simulateTapOnErrorMessage()
+        XCTAssertEqual(sut.errorMessage, nil)
+    }
+
     // MARK: - Helpers
     
     private func makeSUT(
@@ -412,5 +439,17 @@ final class FeedUIIntegrationTests: XCTestCase {
         XCTAssertEqual(cell.isShowingLocation, shouldLocationBeVisible, "Expected location to be \(shouldLocationBeVisible ? "visible" : "hidden") at row \(row)", file: file, line: line)
         XCTAssertEqual(cell.descriptionText, image.description, "Expected description text to be \(image.description ?? "nil") at row \(row)", file: file, line: line)
         XCTAssertEqual(cell.locationText, image.location, "Expected location text to be \(image.location ?? "nil") at row \(row)", file: file, line: line)
+    }
+}
+
+extension FeedUIIntegrationTests {
+    func localized(_ key: String, file: StaticString = #filePath, line: UInt = #line) -> String {
+        let table = "Feed"
+        let bundle = Bundle(for: FeedViewController.self)
+        let value = bundle.localizedString(forKey: key, value: nil, table: table)
+        if value == key {
+            XCTFail("Missing localized string for key: \(key) in table: \(table)", file: file, line: line)
+        }
+        return value
     }
 }

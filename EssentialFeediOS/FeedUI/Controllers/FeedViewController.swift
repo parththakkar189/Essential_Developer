@@ -18,6 +18,8 @@ protocol FeedViewControllerDelegate {
 
 final public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching, FeedLoadingView {
     
+    @IBOutlet private(set) public var errorView: ErrorView!
+    
     var delegate: FeedViewControllerDelegate?
     var onViewIsAppearing: ((FeedViewController) -> Void)?
     var tableModel = [FeedImageCellController]() {
@@ -86,5 +88,15 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
     
     private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
         cellController(forRowAt: indexPath).cancelLoad()
+    }
+}
+
+extension FeedViewController: FeedErrorView {
+    func display(_ viewModel: FeedErrorViewModel) {
+        if let errorMessage = viewModel.errorMessage {
+            errorView.show(message: errorMessage)
+        } else {
+            errorView.hideMessage()
+        }
     }
 }
