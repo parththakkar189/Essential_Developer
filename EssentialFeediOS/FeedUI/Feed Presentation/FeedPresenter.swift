@@ -31,6 +31,14 @@ protocol FeedErrorView {
 
 struct FeedErrorViewModel {
     let errorMessage: String?
+    
+    static var noError: FeedErrorViewModel {
+        return FeedErrorViewModel(errorMessage: nil)
+    }
+    
+    static func error(errorMessage: String) -> FeedErrorViewModel {
+        return FeedErrorViewModel(errorMessage: errorMessage)
+    }
 }
 
 // MARK: FeedViewModel
@@ -65,7 +73,7 @@ final class FeedPresenter {
                 self?.didStartLoadingFeed()
             }
         }
-        errorView.display(.init(errorMessage: .none))
+        errorView.display(.noError)
         loadingView.display(FeedLoadingViewModel(isLoading: true))
     }
     
@@ -87,6 +95,6 @@ final class FeedPresenter {
             }
         }
         loadingView.display(FeedLoadingViewModel(isLoading: false))
-        errorView.display(.init(errorMessage: Localized.Feed.loadError))
+        errorView.display(.error(errorMessage: Localized.Feed.loadError))
     }
 }
