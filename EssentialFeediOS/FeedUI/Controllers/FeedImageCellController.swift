@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import EssentialFeed
 
 protocol FeedImageCellCotrollerDelegate {
     func didRequestImage()
@@ -13,7 +14,7 @@ protocol FeedImageCellCotrollerDelegate {
 }
 
 final class FeedImageCellController: FeedImageView {
-    
+
     private let delegate: FeedImageCellCotrollerDelegate
     private var cell: FeedImageCell?
     
