@@ -53,7 +53,7 @@ final class FeedImagePresentationTests: XCTestCase {
     
     func test_didFinishLoadingImageData_DisplayImageOnSuccessfullTransformation() {
         let image = uniqueImage()
-        let data = Data()
+
         let transformedData = AnyImage()
         let (sut, view) = makeSUT { _ in
             transformedData

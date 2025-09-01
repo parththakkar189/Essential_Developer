@@ -54,8 +54,6 @@
 		B2A32CDF2DED1D3D003126ED /* CoreDataFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF1A112DDC07B000CDF8F9 /* CoreDataFeedStore.swift */; };
 		B2A729462E5142DB00685008 /* FeedImageCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A729452E5142DB00685008 /* FeedImageCellController.swift */; };
 		B2A729482E51480700685008 /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A729472E51480700685008 /* FeedUIComposer.swift */; };
-		B2A7294E2E5263B600685008 /* FeedImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A7294D2E5263B000685008 /* FeedImagePresenter.swift */; };
-		B2A729522E5A561B00685008 /* FeedImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A729512E5A561B00685008 /* FeedImageViewModel.swift */; };
 		B2A729542E5A5CD300685008 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2A729532E5A5CD300685008 /* Feed.storyboard */; };
 		B2A7296A2E5A5D7100685008 /* Feed.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A729692E5A5D7000685008 /* Feed.xcassets */; };
 		B2A7296C2E5A6D9B00685008 /* UITableView+dequeueReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A7296B2E5A6D9B00685008 /* UITableView+dequeueReusableCell.swift */; };
@@ -195,8 +193,6 @@
 		B2A32CDC2DED1CD9003126ED /* ManagedFeedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFeedImage.swift; sourceTree = "<group>"; };
 		B2A729452E5142DB00685008 /* FeedImageCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCellController.swift; sourceTree = "<group>"; };
 		B2A729472E51480700685008 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
-		B2A7294D2E5263B000685008 /* FeedImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImagePresenter.swift; sourceTree = "<group>"; };
-		B2A729512E5A561B00685008 /* FeedImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageViewModel.swift; sourceTree = "<group>"; };
 		B2A729532E5A5CD300685008 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		B2A729692E5A5D7000685008 /* Feed.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Feed.xcassets; sourceTree = "<group>"; };
 		B2A7296B2E5A6D9B00685008 /* UITableView+dequeueReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+dequeueReusableCell.swift"; sourceTree = "<group>"; };
@@ -476,7 +472,6 @@
 		B28D23922E5121190053B0CE /* FeedUI */ = {
 			isa = PBXGroup;
 			children = (
-				B2A729492E525AC200685008 /* Feed Presentation */,
 				B2A7294C2E525B4100685008 /* Composers */,
 				B28D23942E5121380053B0CE /* Views */,
 				B28D23932E51212D0053B0CE /* Controllers */,
@@ -545,15 +540,6 @@
 				B2FF1A172DE3E44C00CDF8F9 /* FeedStore.xcdatamodeld */,
 			);
 			path = Infrastructure;
-			sourceTree = "<group>";
-		};
-		B2A729492E525AC200685008 /* Feed Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				B2A729512E5A561B00685008 /* FeedImageViewModel.swift */,
-				B2A7294D2E5263B000685008 /* FeedImagePresenter.swift */,
-			);
-			path = "Feed Presentation";
 			sourceTree = "<group>";
 		};
 		B2A7294C2E525B4100685008 /* Composers */ = {
@@ -978,8 +964,6 @@
 				B2A729792E5A891100685008 /* FeedViewAdapter.swift in Sources */,
 				B2A7297B2E5A893C00685008 /* FeedLoaderPresentationAdapter.swift in Sources */,
 				B2A729752E5A889A00685008 /* MainQueueDispatchDecorator.swift in Sources */,
-				B2A729522E5A561B00685008 /* FeedImageViewModel.swift in Sources */,
-				B2A7294E2E5263B600685008 /* FeedImagePresenter.swift in Sources */,
 				B2A729462E5142DB00685008 /* FeedImageCellController.swift in Sources */,
 				B2654BD72E494BDE0003D5E6 /* UIView+Shimmering.swift in Sources */,
 				B2EDC9B02E49322600403C45 /* FeedImageCell.swift in Sources */,
