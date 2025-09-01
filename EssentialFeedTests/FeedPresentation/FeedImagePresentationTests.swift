@@ -67,7 +67,7 @@ final class FeedImagePresentationTests: XCTestCase {
         XCTAssertEqual(message?.description, image.description)
         XCTAssertEqual(message?.location, image.location)
         XCTAssertEqual(message?.isLoading, false)
-        XCTAssertEqual(message?.shouldRetry, true)
+        XCTAssertEqual(message?.shouldRetry, false)
         XCTAssertEqual(message?.image, transformedData)
     }
     
