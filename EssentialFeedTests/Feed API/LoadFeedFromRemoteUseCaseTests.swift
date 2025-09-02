@@ -166,8 +166,9 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         }
         private var messages = [(url: URL, completion: (Result) -> Void)]()
         
-        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
             messages.append((url, completion))
+            return Task()
         }
         
         func complete(with error: Error, at index: Int = 0) {
@@ -181,6 +182,12 @@ final class LoadFeedFromRemoteUseCaseTests: XCTestCase {
                 httpVersion: nil,
                 headerFields: nil)!
             messages[index].completion(.success((data, response)))
+        }
+        
+        // MARK: - Task Wrapper
+        
+        private struct Task: HTTPClientTask {
+            func cancel() { }
         }
     }
 }
