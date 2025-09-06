@@ -20,7 +20,7 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         let url = anyURL()
         let (sut, client) = makeSUT()
         
-        sut.loadImageData(url: url) { _ in }
+        sut.loadImageData(from: url) { _ in }
         
         XCTAssertEqual(client.requestedURLs, [url])
     }
@@ -29,8 +29,8 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         let url = anyURL()
         let (sut, client) = makeSUT()
         
-        sut.loadImageData(url: url) { _ in }
-        sut.loadImageData(url: url) { _ in }
+        sut.loadImageData(from: url) { _ in }
+        sut.loadImageData(from: url) { _ in }
         
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
@@ -80,7 +80,7 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         var sut: RemoteFeedImageDataLoader? = RemoteFeedImageDataLoader(client: client)
         
         var capturedResults = [FeedImageDataLoader.Result]()
-        sut?.loadImageData(url: anyURL()) { capturedResults.append($0) }
+        sut?.loadImageData(from: anyURL()) { capturedResults.append($0) }
         
         sut = nil
         client.complete(withStatusCode: 200, data: anyData())
@@ -94,7 +94,7 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         
         let url = anyURL()
         
-        let task = sut.loadImageData(url: url) { _ in }
+        let task = sut.loadImageData(from: url) { _ in }
         
         XCTAssertTrue(client.cancelledURls.isEmpty, "Expected no cancelled URL request until task is cancelled.")
         
@@ -108,7 +108,7 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         
         var received = [FeedImageDataLoader.Result]()
         
-        let task = sut.loadImageData(url: anyURL()) { received.append($0) }
+        let task = sut.loadImageData(from: anyURL()) { received.append($0) }
         task.cancel()
     
         client.complete(withStatusCode: 400, data: anyData())
@@ -145,7 +145,7 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         let url = anyURL()
         let exp = expectation(description: "Wait for load completion")
         
-        sut.loadImageData(url: url) { receivedResult in
+        sut.loadImageData(from: url) { receivedResult in
             switch (receivedResult, expectedResult) {
             case let (
                 .success(receivedData),
