@@ -25,7 +25,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        makeSUT().get(from: url) { _ in }
+        _ = makeSUT().get(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
     }
@@ -55,7 +55,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         let receivedValues = resultValueFor((data: data, response: response, error: nil))
         
         let exp = expectation(description: "Wait for completion")
-        makeSUT().get(from: anyURL()) { result in
+        _ = makeSUT().get(from: anyURL()) { result in
             switch result {
             case let .success((receivedData, receivedHTTPURLResponse)):
                 XCTAssertEqual(receivedData, receivedValues?.data)
@@ -76,7 +76,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stub(data: nil, response: response, error: nil)
         
         let exp = expectation(description: "Wait for completion")
-        makeSUT().get(from: anyURL()) { result in
+        _ = makeSUT().get(from: anyURL()) { result in
             switch result {
             case let .success((receivedData, receivedHTTPURLResponse)):
                 let emptyData = Data()
