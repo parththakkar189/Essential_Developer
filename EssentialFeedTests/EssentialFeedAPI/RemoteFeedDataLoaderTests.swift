@@ -35,10 +35,10 @@ final class RemoteFeedDataLoaderTests: XCTestCase {
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
-    func test_loadImageDataFromURL_deliversErrorOnClientError() {
+    func test_loadImageDataFromURL_deliversConnectivityErrorOnClientError() {
         let clientError = anyError()
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWith: .failure(clientError), when: {
+        expect(sut, toCompleteWith: failure(.connectivity), when: {
             client.complete(with: clientError)
         })
     }
