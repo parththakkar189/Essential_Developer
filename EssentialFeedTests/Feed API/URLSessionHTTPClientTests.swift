@@ -9,13 +9,8 @@ import EssentialFeed
 
 class URLSessionHTTPClientTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        URLProtocolStub.startInterceptingRequest()
-    }
-
     override func tearDown() {
-        URLProtocolStub.stopInterceptingRequest()
+        URLProtocolStub.removeStub()
         super.tearDown()
     }
     
@@ -107,9 +102,12 @@ class URLSessionHTTPClientTests: XCTestCase {
     private func makeSUT(file: StaticString = #filePath,
                          line: UInt = #line
     ) -> HTTPClient {
-        let sut = URLSessionHTTPClient()
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        let session = URLSession(configuration: configuration)
+        let sut = URLSessionHTTPClient(session: session)
         trackForMemoryLeaks(sut, file: file, line: line)
-        return URLSessionHTTPClient()
+        return sut
     }
     
     private func anyData() -> Data {
@@ -210,12 +208,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             set { queue.sync { _stub = newValue } }
         }
         
-        static func startInterceptingRequest() {
-            URLProtocol.registerClass(URLProtocolStub.self)
-        }
-        
-        static func stopInterceptingRequest() {
-            URLProtocolStub.unregisterClass(URLProtocolStub.self)
+        static func removeStub() {
             stub = nil
         }
         
