@@ -28,7 +28,7 @@
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <TestPlanReference
-               reference = "container:CI/CI.xctestplan">
+               reference = "container:CI/CI_macOS.xctestplan">
             </TestPlanReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,7 +40,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:CI/CI.xctestplan"
+            reference = "container:CI/CI_macOS.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
