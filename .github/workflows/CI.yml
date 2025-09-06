@@ -41,7 +41,10 @@ jobs:
 
       - name: List EssentialFeed directory contents
         run: ls -al EssentialFeed
-
+        
+      - name: List available simulators
+        run: xcrun simctl list devices
+      
       - name: Build and test ${{ matrix.platform }} target
         run: |
           set -o pipefail
@@ -57,7 +60,7 @@ jobs:
               -project EssentialFeed.xcodeproj \
               -scheme CI_iOS \
               -sdk iphonesimulator \
-              -destination "platform=iOS Simulator,name=iPhone 15,OS=17.2" \
+              -destination "platform=iOS Simulator,name=iPhone 15" \
               ONLY_ACTIVE_ARCH=YES | tee xcodebuild-iOS.log
           fi
 
