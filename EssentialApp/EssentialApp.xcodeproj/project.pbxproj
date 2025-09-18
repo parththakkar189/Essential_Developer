@@ -3,8 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
+
+/* Begin PBXBuildFile section */
+		B2D2E3922E7C648A004A2DCE /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */; };
+		B2D2E3932E7C648A004A2DCE /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B2D2E3962E7C648E004A2DCE /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3952E7C648E004A2DCE /* EssentialFeediOS.framework */; };
+		B2D2E3972E7C648E004A2DCE /* EssentialFeediOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3952E7C648E004A2DCE /* EssentialFeediOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		B293F1752E7B2AA800D762D6 /* PBXContainerItemProxy */ = {
@@ -23,14 +30,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B2D2E3942E7C648A004A2DCE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B2D2E3932E7C648A004A2DCE /* EssentialFeed.framework in Embed Frameworks */,
+				B2D2E3972E7C648E004A2DCE /* EssentialFeediOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B293F15E2E7B2AA400D762D6 /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B293F1742E7B2AA800D762D6 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B293F17E2E7B2AA800D762D6 /* EssentialAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2D2E3952E7C648E004A2DCE /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B293F1862E7B2AA800D762D6 /* Exceptions for "EssentialApp" folder in "EssentialApp" target */ = {
+		B293F1862E7B2AA800D762D6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,24 +64,9 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		B293F1602E7B2AA400D762D6 /* EssentialApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				B293F1862E7B2AA800D762D6 /* Exceptions for "EssentialApp" folder in "EssentialApp" target */,
-			);
-			path = EssentialApp;
-			sourceTree = "<group>";
-		};
-		B293F1772E7B2AA800D762D6 /* EssentialAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EssentialAppTests;
-			sourceTree = "<group>";
-		};
-		B293F1812E7B2AA800D762D6 /* EssentialAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EssentialAppUITests;
-			sourceTree = "<group>";
-		};
+		B293F1602E7B2AA400D762D6 /* EssentialApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (B293F1862E7B2AA800D762D6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = EssentialApp; sourceTree = "<group>"; };
+		B293F1772E7B2AA800D762D6 /* EssentialAppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialAppTests; sourceTree = "<group>"; };
+		B293F1812E7B2AA800D762D6 /* EssentialAppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = EssentialAppUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2E3922E7C648A004A2DCE /* EssentialFeed.framework in Frameworks */,
+				B2D2E3962E7C648E004A2DCE /* EssentialFeediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +102,7 @@
 				B293F1602E7B2AA400D762D6 /* EssentialApp */,
 				B293F1772E7B2AA800D762D6 /* EssentialAppTests */,
 				B293F1812E7B2AA800D762D6 /* EssentialAppUITests */,
+				B2D2E3902E7C648A004A2DCE /* Frameworks */,
 				B293F15F2E7B2AA400D762D6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,6 +117,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B2D2E3902E7C648A004A2DCE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2E3952E7C648E004A2DCE /* EssentialFeediOS.framework */,
+				B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +136,7 @@
 				B293F15A2E7B2AA400D762D6 /* Sources */,
 				B293F15B2E7B2AA400D762D6 /* Frameworks */,
 				B293F15C2E7B2AA400D762D6 /* Resources */,
+				B2D2E3942E7C648A004A2DCE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +222,7 @@
 				};
 			};
 			buildConfigurationList = B293F1592E7B2AA400D762D6 /* Build configuration list for PBXProject "EssentialApp" */;
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -208,7 +231,6 @@
 			);
 			mainGroup = B293F1552E7B2AA400D762D6;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			productRefGroup = B293F15F2E7B2AA400D762D6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,6 +319,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,6 +352,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

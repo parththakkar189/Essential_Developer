@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import EssentialFeed
+import EssentialFeediOS
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
