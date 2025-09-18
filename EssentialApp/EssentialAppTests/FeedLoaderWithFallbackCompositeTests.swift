@@ -42,40 +42,17 @@ final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
             primaryResult: .success(primaryFeed),
             fallbackResult: .success(fallbackFeed)
         )
-
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { result in
-            switch result {
-            case let .success(receivedFeed):
-                XCTAssertEqual(receivedFeed, primaryFeed)
-            case .failure:
-                XCTFail("Expected successful load feed result, got \(result) instead")
-            }
-            exp.fulfill()
-        }
         
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toCompleteWith: .success(primaryFeed))
     }
     
     func test_load_deliversFallbackFeedOnPrimaryLoaderFailure() {
         let fallbackFeed = uniqueFeed()
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackFeed))
         
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { result in
-            switch result {
-            case let .success(receivedFeed):
-                XCTAssertEqual(receivedFeed, fallbackFeed)
-            case .failure:
-                XCTFail(
-                    "Expected successful load feed result, got \(result) instead."
-                )
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toCompleteWith: .success(fallbackFeed))
     }
-    
+
     // MARK: - Helper
     
     private func makeSUT(
@@ -106,6 +83,28 @@ final class FeedLoaderWithFallbackCompositeTests: XCTestCase {
         }
     }
     
+    private func expect(
+        _ sut: FeedLoader,
+        toCompleteWith expectedResult: FeedLoader.Result,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        let exp = expectation(description: "Wait for load completion")
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedFeed), .success(expectedFeed)):
+                XCTAssertEqual(receivedFeed, expectedFeed)
+            case (.failure, .failure):
+                break
+            default:
+                XCTFail(
+                    "Expected \(expectedResult), got \(receivedResult) instead."
+                )
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
     private func uniqueFeed() -> [FeedImage] {
         return [FeedImage(id: UUID(), description: "any", location: "any", url: URL(string: "http://any-url.com")!)]
     }
