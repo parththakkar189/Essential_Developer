@@ -93,7 +93,7 @@ final class CoreDataFeedImageDataStoreTests: XCTestCase {
         toCompleteRetrievalWith expectedResult: FeedImageDataStore.RetrievalResult,
         for url: URL,
         file: StaticString = #file,
-        line: UInt = #line,
+        line: UInt = #line
     ) {
         let exp = expectation(description: "Wait for load completion")
         
