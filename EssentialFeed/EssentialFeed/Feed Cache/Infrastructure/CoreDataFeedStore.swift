@@ -15,7 +15,7 @@ public final class CoreDataFeedStore {
     private let context: NSManagedObjectContext
     
     public init(
-        storeURL: URL,
+        storeURL: URL
     ) throws {
         let bundle = Bundle(for: Self.self)
         container = try NSPersistentContainer.load(modelName: "FeedStore", url: storeURL, in: bundle)
