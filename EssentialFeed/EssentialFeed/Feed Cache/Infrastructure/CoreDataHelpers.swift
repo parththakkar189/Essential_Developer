@@ -16,30 +16,24 @@ internal extension NSPersistentContainer {
     static func load(
         modelName name: String,
         url: URL,
-        in bundle: Bundle
+        model: NSManagedObjectModel
     ) throws -> NSPersistentContainer {
-        guard let model = NSManagedObjectModel.with(name: name, in: bundle) else {
-            throw LoadingError.modelNotFound
-        }
-        
         let description = NSPersistentStoreDescription(url: url)
         let container = NSPersistentContainer(name: name, managedObjectModel: model)
         container.persistentStoreDescriptions = [description]
         
-        var loadError: Error?
+        var loadError: Swift.Error?
         container.loadPersistentStores { _, error in
             loadError = error
         }
         
-        if let error = loadError {
-            throw error
-        }
+        try loadError.map { throw $0 }
         
         return container
     }
 }
 
-private extension NSManagedObjectModel {
+extension NSManagedObjectModel {
     static func with(name: String, in bundle: Bundle) -> NSManagedObjectModel? {
         return bundle
             .url(forResource: name, withExtension: "momd")
