@@ -91,7 +91,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         XCTAssertEqual(fallbackLoader.cancelledURLs, [url], "Expected no cancellled URL in the fallback loader")
     }
     
-    func test_loadImadata_deliversPrimaryImageDataOnPrimaryLoaderSuccess() {
+    func test_loadImageData_deliversPrimaryImageDataOnPrimaryLoaderSuccess() {
         let primaryData = anyData()
         
         let (sut, primaryLoader, _) = makeSUT()
@@ -101,7 +101,7 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         }
     }
     
-    func test_loadImadata_deliversFallbackImageDataOnPrimaryLoaderFailure() {
+    func test_loadImageData_deliversFallbackImageDataOnPrimaryLoaderFailure() {
         let fallbackData = anyData()
         
         let (sut, primaryLoader, fallbackLoader) = makeSUT()
@@ -112,6 +112,14 @@ final class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         }
     }
     
+    func test_loadImageData_deliversErrorOnPrimaryAndFallbackLoaderFailure() {
+        let (sut, primaryLoader, fallbackLoader) = makeSUT()
+        
+        expect(sut, toCompleteWith: .failure(anyNSError())) {
+            primaryLoader.complete(with: anyNSError())
+            fallbackLoader.complete(with: anyNSError())
+        }
+    }
     // MARK: - Helpers
     
     private func makeSUT(
