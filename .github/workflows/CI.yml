@@ -8,7 +8,6 @@ on:
 env:
   IDEPackageSupportUseBuiltinSCM: YES
   CODE_SIGN_IDENTITY: ""
-  CODE_SIGNING_REQUIRED: NO
 
 jobs:
   build-and-test:
@@ -27,37 +26,40 @@ jobs:
         with:
           xcode-version: '16.2'
 
-      - name: Xcode version
+      - name: Show Xcode version
         run: /usr/bin/xcodebuild -version
+
+      - name: Debug: Find all xcodeproj files
+        run: find . -name "*.xcodeproj"
 
       - name: Cache Derived Data
         uses: actions/cache@v4
         with:
           path: ~/Library/Developer/Xcode/DerivedData
-          key: ${{ runner.os }}-xcode-${{ matrix.platform }}-${{ hashFiles('**/*.xcodeproj') }}
+          key: ${{ runner.os }}-xcode-${{ matrix.platform }}-${{ hashFiles('**/*.xcodeproj', '**/*.xcworkspace') }}
 
       - name: List root directory contents
         run: ls -al
 
       - name: List EssentialFeed directory contents
         run: ls -al EssentialFeed
-        
+
       - name: Build and test ${{ matrix.platform }} target
         run: |
           set -o pipefail
           if [ "${{ matrix.platform }}" == "macOS" ]; then
             xcodebuild clean build test \
-              -project EssentialFeed.xcodeproj \
+              -project EssentialFeed/EssentialFeed.xcodeproj \
               -scheme CI_macOS \
               -sdk macosx \
-              -destination "platform=macOS,arch=x86_64" \
+              -destination "platform=macOS,arch=arm64" \
               ONLY_ACTIVE_ARCH=YES | tee xcodebuild-macOS.log
           else
             xcodebuild clean build test \
-              -project EssentialFeed.xcodeproj \
+              -project EssentialFeed/EssentialFeed.xcodeproj \
               -scheme CI_iOS \
               -sdk iphonesimulator \
-              -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.4' \
+              -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
               ONLY_ACTIVE_ARCH=YES | tee xcodebuild-iOS.log
           fi
 
@@ -73,7 +75,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: xcodebuild-logs-${{ matrix.platform }}
-          path: |
-            xcodebuild-macOS.log
-            xcodebuild-iOS.log
-            ~/Library/Logs
+          path: xcodebuild-*.log
