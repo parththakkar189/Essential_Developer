@@ -29,9 +29,6 @@ jobs:
       - name: Show Xcode version
         run: /usr/bin/xcodebuild -version
 
-      - name: Debug: Find all xcodeproj files
-        run: find . -name "*.xcodeproj"
-
       - name: Cache Derived Data
         uses: actions/cache@v4
         with:
@@ -43,6 +40,9 @@ jobs:
 
       - name: List EssentialFeed directory contents
         run: ls -al EssentialFeed
+
+      - name: List available simulators
+        run: xcrun simctl list devices
 
       - name: Build and test ${{ matrix.platform }} target
         run: |
@@ -56,10 +56,10 @@ jobs:
               ONLY_ACTIVE_ARCH=YES | tee xcodebuild-macOS.log
           else
             xcodebuild clean build test \
-              -project EssentialFeed/EssentialFeed.xcodeproj \
+              -workspace EssentialApp/EssentialApp.xcworkspace \
               -scheme CI_iOS \
               -sdk iphonesimulator \
-              -destination "platform=iOS Simulator,name=iPhone 15,OS=latest" \
+              -destination 'id=6946CBE0-1F3F-48DF-AAB7-995EFA99CFBC' \
               ONLY_ACTIVE_ARCH=YES | tee xcodebuild-iOS.log
           fi
 
