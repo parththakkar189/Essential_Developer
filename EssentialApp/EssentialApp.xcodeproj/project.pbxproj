@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B27D95F52E8B1B4B009DDC30 /* CI_iOS.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = B27D95F42E8B1B4B009DDC30 /* CI_iOS.xctestplan */; };
 		B2D2E3922E7C648A004A2DCE /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */; };
 		B2D2E3932E7C648A004A2DCE /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3912E7C648A004A2DCE /* EssentialFeed.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B2D2E3962E7C648E004A2DCE /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2E3952E7C648E004A2DCE /* EssentialFeediOS.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B27D95F42E8B1B4B009DDC30 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CI_iOS.xctestplan; sourceTree = "<group>"; };
 		B293F15E2E7B2AA400D762D6 /* EssentialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EssentialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B293F1742E7B2AA800D762D6 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B293F17E2E7B2AA800D762D6 /* EssentialAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 		B293F1552E7B2AA400D762D6 = {
 			isa = PBXGroup;
 			children = (
+				B27D95F42E8B1B4B009DDC30 /* CI_iOS.xctestplan */,
 				B293F1602E7B2AA400D762D6 /* EssentialApp */,
 				B293F1772E7B2AA800D762D6 /* EssentialAppTests */,
 				B293F1812E7B2AA800D762D6 /* EssentialAppUITests */,
@@ -247,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27D95F52E8B1B4B009DDC30 /* CI_iOS.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
